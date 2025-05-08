@@ -1,52 +1,56 @@
 import { LitElement, html, css } from "lit";
 import { customElement, state } from "lit/decorators.js";
+import { appStyles } from "../styles/app-styles";
 
 @customElement("mdrd-egfr-calculator")
 export class MDRDEGFRCalculator extends LitElement {
-  static styles = css`
-    :host {
-      display: block;
-      max-width: 400px;
-      padding: 1rem;
-      border: 1px solid #ccc;
-      border-radius: 1rem;
-      font-family: sans-serif;
-    }
+  static styles = [
+    appStyles,
+    css`
+      :host {
+        display: block;
+        max-width: 400px;
+        padding: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 1rem;
+        font-family: sans-serif;
+      }
 
-    label {
-      display: block;
-      margin-top: 0.75rem;
-    }
+      label {
+        display: block;
+        margin-top: 0.75rem;
+      }
 
-    input,
-    select {
-      width: 100%;
-      padding: 0.5rem;
-      margin-top: 0.25rem;
-    }
+      input,
+      select {
+        width: 100%;
+        padding: 0.5rem;
+        margin-top: 0.25rem;
+      }
 
-    .result {
-      margin-top: 1rem;
-      font-weight: bold;
-    }
+      .result {
+        margin-top: 1rem;
+        font-weight: bold;
+      }
 
-    .note {
-      font-size: 0.85rem;
-      color: #666;
-      margin-top: 1rem;
-    }
+      .note {
+        font-size: 0.85rem;
+        color: #666;
+        margin-top: 1rem;
+      }
 
-    .error {
-      color: darkred;
-      font-size: 0.9rem;
-      margin-top: 0.25rem;
-    }
+      .error {
+        color: darkred;
+        font-size: 0.9rem;
+        margin-top: 0.25rem;
+      }
 
-    button {
-      margin-top: 1rem;
-      padding: 0.5rem 1rem;
-    }
-  `;
+      button {
+        margin-top: 1rem;
+        padding: 0.5rem 1rem;
+      }
+    `,
+  ];
 
   @state() private kreatinin: number | null = 1.0;
   @state() private alter: number | null = 40;
