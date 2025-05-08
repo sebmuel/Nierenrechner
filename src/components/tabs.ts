@@ -14,8 +14,8 @@ export class Tabs extends LitElement {
       nav > ::slotted([slot="tab"]) {
         padding: 1rem 2rem;
         flex: 1 1 auto;
-        color: lightgrey;
-        border-bottom: 2px solid lightgrey;
+        color: #fff;
+        border-bottom: 2px solid #fff;
         text-align: center;
         cursor: pointer;
         margin-bottom: 5rem;
@@ -47,7 +47,6 @@ export class Tabs extends LitElement {
     this._panels = slotPanels.assignedElements({
       flatten: true,
     }) as HTMLElement[];
-
     this.selectTab(0);
   }
 
@@ -70,6 +69,8 @@ export class Tabs extends LitElement {
       .find((el) => this._tabs.includes(el as HTMLElement)) as
       | HTMLElement
       | undefined;
+
+    console.log(event.composedPath());
 
     if (!clickedTab) return;
 

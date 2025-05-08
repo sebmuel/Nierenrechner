@@ -3,8 +3,9 @@ import { html, LitElement } from "lit";
 import { customElement } from "lit/decorators.js";
 import { logger } from "./services/debugger-logger";
 import { nierenrechnerStyles } from "./styles/nierenrechner-styles";
-import "./components/tabs";
 import type { TabSelectedData } from "./types";
+import "./components/tabs";
+import "./components/mdrd-rechner";
 
 @customElement("app-nierenrechner")
 export class Nierenrechner extends LitElement {
@@ -16,7 +17,9 @@ export class Nierenrechner extends LitElement {
         <div class="rechner">
           <app-tabs>
             <h2 slot="tab">Tab 1</h2>
-            <section slot="panel">Content for tab 1</section>
+            <section slot="panel">
+              <mdrd-egfr-calculator></mdrd-egfr-calculator>
+            </section>
             <h2 slot="tab">Tab 2</h2>
             <section slot="panel">Content for tab 2</section>
             <h2 slot="tab">Tab 3</h2>

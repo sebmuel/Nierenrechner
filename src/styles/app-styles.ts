@@ -23,6 +23,7 @@ export const appStyles = css`
   h5,
   h6 {
     margin: 0 0 0.5rem 0;
+    font-weight: 300;
   }
 
   p,
