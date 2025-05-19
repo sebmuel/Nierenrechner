@@ -1,6 +1,7 @@
 import { LitElement, html, css } from "lit";
 import { customElement, state } from "lit/decorators.js";
 import { appStyles } from "../styles/app-styles";
+import {EgfrCalculator} from "../services/egfrCalculator.ts";
 
 @customElement("mdrd-egfr-calculator")
 export class MDRDEGFRCalculator extends LitElement {
@@ -60,6 +61,8 @@ export class MDRDEGFRCalculator extends LitElement {
   @state() private errors: { kreatinin?: string; alter?: string } = {};
 
   private validate() {
+    let egfrCalculator = new EgfrCalculator();
+    console.log(egfrCalculator.calculateCkdEpi(90, "µmol/l", 42, "m"));
     const errors: typeof this.errors = {};
 
     if (
