@@ -62,7 +62,7 @@ export class MDRDEGFRCalculator extends LitElement {
 
   private validate() {
     let egfrCalculator = new EgfrCalculator();
-    console.log(egfrCalculator.calculateCkdEpi(90, "µmol/l", 42, "m"));
+    console.log("Result: " + egfrCalculator.calculateCockcroftGault(50, "µmol/l", 66, "w", 70));
     const errors: typeof this.errors = {};
 
     if (

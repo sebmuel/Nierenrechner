@@ -3,8 +3,8 @@ class Logger {
   #logPrefix: string = `[nierenrechner][${new Date().toLocaleTimeString()}] `;
   #count: number = 1;
 
-  constructor() {
-    const params = new URLSearchParams(window.location.search);
+  constructor(locationSearch: string = typeof window !== "undefined" ? window.location.search : "") {
+    const params = new URLSearchParams(locationSearch);
 
     if (params.get("debug")?.toLocaleLowerCase() === "true") {
       this.#isDebug = true;
@@ -23,3 +23,4 @@ class Logger {
 }
 
 export const logger = new Logger();
+export { Logger };

@@ -1,6 +1,7 @@
 export type CalcTypes = "MDRD" | "CKD-EPI" | "Mayo" | "Cockcroft-Gault";
-export type GenderTypes = "male" | "female";
-export type KreatininEinheit = "mg/dl" | "µmol/l";
+export type GenderTypes = "m" | "w";
+export type CreatinineUnit = "mg/dl" | "µmol/l";
+export type SkinColor = "black" | "white";
 
 /**
  * Event fired when a tab is selected
