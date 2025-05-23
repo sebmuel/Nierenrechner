@@ -1,12 +1,5 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import {beforeEach, describe, expect, it} from "vitest";
 import {EgfrCalculator} from "../services/egfrCalculator.ts";
-import {GenderFactors} from "../constants/genderFactors.ts";
-import{SkinColorFactors} from "../constants/skinColorFactors.ts";
-
-// Mokup Logger
-vi.mock("./debugger-logger", () => ({
-    logger: { log: vi.fn() }
-}));
 
 // Creating a test suite to group tests
 describe("EgfrCalculator", () => {
@@ -23,34 +16,30 @@ describe("EgfrCalculator", () => {
             const age = 50;
             const gender = "w";
             const skinColor = "white";
-            
-            const result = calculator.calculateMdrd(serumCreatinine, unit, age, gender, skinColor);
-            
-            const expected = 186 *
-                Math.pow(serumCreatinine, -1.154) *
-                Math.pow(age, -0.203) *
-                GenderFactors[gender].mdrd *
-                SkinColorFactors[skinColor].mdrd;
-            
-            expect(result).toBe(Math.round(expected * 100) / 100);
+
+            const result = calculator.calculateMdrd(serumCreatinine, unit, age, gender, skinColor).value;
+
+            const expected = 62.38;
+
+            console.log("expected ", expected);
+            console.log("result ", result);
+            expect(result).toBe(expected);
         });
 
-        it("should handle unit conversion", () => {
-            const serumCreatinine = 88.42;
+        it("should handle correct unit conversion from µmol/l to mg/dl", () => {
+            const serumCreatinine = 100;
             const unit = "µmol/l";
             const age = 50;
             const gender = "m";
             const skinColor = "black";
             
-            const result = calculator.calculateMdrd(serumCreatinine, unit, age, gender, skinColor);
+            const result = calculator.calculateMdrd(serumCreatinine, unit, age, gender, skinColor).value;
 
-            const serumCreatinineMgDl = serumCreatinine / 88.42;
-            const expected = 186 *
-                Math.pow(serumCreatinineMgDl, -1.154) *
-                Math.pow(age, -0.203) *
-                GenderFactors[gender].mdrd *
-                SkinColorFactors[skinColor].mdrd;
-            expect(result).toBe(Math.round(expected * 100) / 100);
+            const expected = 88.4;
+
+            console.log("expected ", expected);
+            console.log("result ", result);
+            expect(result).toBe(expected);
         });
     });
 
@@ -61,16 +50,13 @@ describe("EgfrCalculator", () => {
             const age = 40;
             const gender = "m";
 
-            const result = calculator.calculateMayoQuadratic(serumCreatinine, unit, age, gender);
-            
-            const exponent =
-                1.911 +
-                5.249 / serumCreatinine -
-                2.114 / (serumCreatinine ** 2) -
-                0.00686 * age -
-                GenderFactors[gender].mayoQuadratic;
-            const expected = Math.exp(exponent);
-            expect(result).toBe(Math.round(expected * 100) / 100);
+            const result = calculator.calculateMayoQuadratic(serumCreatinine, unit, age, gender).value;
+
+            const expected = 93.95;
+
+            console.log("expected ", expected);
+            console.log("result ", result);
+            expect(result).toBe(expected);
         });
     });
 
@@ -79,19 +65,14 @@ describe("EgfrCalculator", () => {
             const serumCreatinine = 0.9;
             const age = 65;
             const gender = "w";
-            const genderFact = GenderFactors[gender];
-            const scOverK = serumCreatinine / genderFact.ckdEpiK;
-            const minTerm = Math.min(scOverK, 1);
-            const maxTerm = Math.max(scOverK, 1);
 
-            const result = calculator.calculateCkdEpi(serumCreatinine, "mg/dl", age, gender);
-            
-            const expected = 142 *
-                (minTerm ** genderFact.ckdEpiA) *
-                (maxTerm ** -1.200) *
-                (0.9938 ** age) *
-                genderFact.ckdEpi;
-            expect(result).toBe(Math.round(expected * 100) / 100);
+            const result = calculator.calculateCkdEpi(serumCreatinine, "mg/dl", age, gender).value;
+
+            const expected = 70.95;
+
+            console.log("expected ", expected);
+            console.log("result ", result);
+            expect(result).toBe(expected);
         });
     });
 
@@ -100,19 +81,14 @@ describe("EgfrCalculator", () => {
             const cystatin = 1.1;
             const age = 40;
             const gender = "m";
-            const cysOverK = cystatin / 0.8;
-            const minTerm = Math.min(cysOverK, 1);
-            const maxTerm = Math.max(cysOverK, 1);
 
-            const result = calculator.calculateCkdEpiForCystatin(cystatin, age, gender);
-            
-            const expected = 133 *
-                (minTerm ** -0.499) *
-                (maxTerm ** -1.328) *
-                (0.996 ** age) *
-                GenderFactors[gender].ckdEpiCys;
-            
-            expect(result).toBe(Math.round(expected * 100) / 100);
+            const result = calculator.calculateCkdEpiForCystatin(cystatin, age, gender).value;
+
+            const expected = 74.23;
+
+            console.log("expected ", expected);
+            console.log("result ", result);
+            expect(result).toBe(expected);
         });
     });
 
@@ -123,13 +99,14 @@ describe("EgfrCalculator", () => {
             const gender = "w";
             const weight = 65;
             const unit = "mg/dl";
-            const ageResult = 140 - age;
-            const weightResult = weight / 72;
 
-            const result = calculator.calculateCockcroftGault(serumCreatinine, unit, age, gender, weight);
-            
-            const expected = ageResult / serumCreatinine * weightResult * GenderFactors[gender].cockcroftGault;
-            expect(result).toBe(Math.round(expected * 100) / 100);
+            const result = calculator.calculateCockcroftGault(serumCreatinine, unit, age, gender, weight).value;
+
+            const expected = 61.39;
+
+            console.log("expected ", expected);
+            console.log("result ", result);
+            expect(result).toBe(expected);
         });
     });
 });
