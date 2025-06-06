@@ -1,5 +1,5 @@
 import { css, html, LitElement } from "lit";
-import { customElement, state } from "lit/decorators.js";
+import { customElement } from "lit/decorators.js";
 import { EgfrCalculator } from "../../services/egfrCalculator";
 import {
   creatinineUnits,
@@ -10,7 +10,6 @@ import {
 } from "../../types";
 import { appStyles } from "../../styles/app-styles";
 import "../description";
-import { logger } from "../../services/debugger-logger";
 
 @customElement("app-cmkd-epi-calculator")
 export default class CmkdEpiCalculator extends LitElement {
