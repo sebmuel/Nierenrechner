@@ -36,12 +36,8 @@ export class Tabs extends LitElement {
   private _panels: HTMLElement[] = [];
 
   firstUpdated() {
-    const slotTabs = this.shadowRoot!.querySelector(
-      'slot[name="tab"]'
-    ) as HTMLSlotElement;
-    const slotPanels = this.shadowRoot!.querySelector(
-      'slot[name="panel"]'
-    ) as HTMLSlotElement;
+    const slotTabs = this.shadowRoot!.querySelector('slot[name="tab"]') as HTMLSlotElement;
+    const slotPanels = this.shadowRoot!.querySelector('slot[name="panel"]') as HTMLSlotElement;
 
     this._tabs = slotTabs.assignedElements({ flatten: true }) as HTMLElement[];
     this._panels = slotPanels.assignedElements({
@@ -64,9 +60,7 @@ export class Tabs extends LitElement {
   }
 
   private handleSelect(event: Event) {
-    const clickedTab = event
-      .composedPath()
-      .find((el) => this._tabs.includes(el as HTMLElement)) as
+    const clickedTab = event.composedPath().find((el) => this._tabs.includes(el as HTMLElement)) as
       | HTMLElement
       | undefined;
 
