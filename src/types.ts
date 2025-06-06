@@ -1,4 +1,4 @@
-import type { GfrResult } from "./classes/GfrResult";
+import type { CalcResult } from "./classes/GfrResult";
 
 export const creatinineUnits = ["mg/dl", "µmol/l"] as const;
 export type CreatinineUnit = (typeof creatinineUnits)[number];
@@ -23,8 +23,8 @@ export class TabSelectedEvent extends CustomEvent<TabSelectedData> {
   }
 }
 
-export class ResultEvent extends CustomEvent<GfrResult> {
-  constructor(type: string, eventInitDict: CustomEventInit<GfrResult>) {
+export class ResultEvent extends CustomEvent<CalcResult> {
+  constructor(type: string, eventInitDict: CustomEventInit<CalcResult>) {
     eventInitDict.bubbles = true;
     eventInitDict.composed = true;
     super(type, eventInitDict);
@@ -32,3 +32,8 @@ export class ResultEvent extends CustomEvent<GfrResult> {
 }
 
 export type CalculatorInputTypes = "text" | "number";
+export type CalculatorInputFields = {
+  icon: string | undefined;
+  type: CalculatorInputTypes;
+  value: string | number | ;
+};

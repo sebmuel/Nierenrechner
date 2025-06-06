@@ -5,11 +5,13 @@ import {
   creatinineUnits,
   genderTypes,
   ResultEvent,
+  type CalculatorInputFields,
   type CreatinineUnit,
   type GenderTypes,
 } from "../../types";
 import { appStyles } from "../../styles/app-styles";
 import "../description";
+import { CalcResult } from "../../classes/GfrResult";
 
 @customElement("app-cmkd-epi-calculator")
 export default class CmkdEpiCalculator extends LitElement {
@@ -36,11 +38,17 @@ export default class CmkdEpiCalculator extends LitElement {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
     const serumCreatinine = Number.parseInt(formData.get("serumCreatinine") as string);
+    const age = Number.parseInt(formData.get("age") as string);
     const unit = formData.get("unit") as CreatinineUnit;
-    const age = formData.get("age") as string;
     const gender = formData.get("gender") as GenderTypes;
+
+    const inputs: Record<string, CalculatorInputFields> = {};
+
     const result = this.calculator.calculateCkdEpi(serumCreatinine, unit, Number(age), gender);
-    this.dispatchEvent(new ResultEvent("result", { detail: result }));
+
+    const calcResult = new CalcResult(result.value, result.unit, result.calculatorType, inputs);
+
+    this.dispatchEvent(new ResultEvent("result", { detail: calcResult }));
   }
 
   render() {

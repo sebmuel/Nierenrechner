@@ -57,6 +57,17 @@ export class ResultModal extends LitElement {
         transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out;
         cursor: pointer;
       }
+
+      .modal .header h5 {
+        font-size: var(--app-modal-headline-font-size, 1.5rem);
+        font-weight: var(--app-modal-headline-font-weight, 600);
+        color: var(--app-modal-headline-font-color, #000);
+      }
+
+      .modal .header h5 span {
+        font-weight: 600;
+        text-decoration: underline;
+      }
     `,
   ];
 
@@ -85,11 +96,22 @@ export class ResultModal extends LitElement {
     super.disconnectedCallback();
   }
 
+  mapType() {
+    switch (this.result?.calculatorType) {
+      case "CKD-EPI":
+        return html`CKD-EPI-Formel`;
+      case "MDRD":
+        return html`MDRD-Formel`;
+      default:
+        throw new Error("Unknown calculator type");
+    }
+  }
+
   render() {
     if (!this.open) return html``;
     return html` <div class="modal">
       <div class="header">
-        <h5>GFR Result</h5>
+        <h5>Berechnung eGFR nach <span>${this.mapType()}</span></h5>
         <button class="close" @click=${this.close}>X</button>
       </div>
       <div class="content">${this.result?.value}</div>

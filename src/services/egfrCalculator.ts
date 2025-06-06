@@ -23,7 +23,7 @@ export class EgfrCalculator {
       genderFactors.mdrd *
       skinColorFactors.mdrd;
 
-    return new GfrResult(Math.round(result * 100) / 100, "ml/min/1.73m²");
+    return new GfrResult(Math.round(result * 100) / 100, "ml/min/1.73m²", "MDRD");
   }
 
   public calculateMayoQuadratic(
@@ -44,7 +44,7 @@ export class EgfrCalculator {
 
     let result = Math.exp(exponent);
     logger.log("result " + result);
-    return new GfrResult(Math.round(result * 100) / 100, "mL/min/1.73m²");
+    return new GfrResult(Math.round(result * 100) / 100, "mL/min/1.73m²", "Mayo");
   }
 
   public calculateCkdEpi(serumCreatinine: number, unit: CreatinineUnit, age: number, gender: GenderTypes) {
@@ -57,7 +57,7 @@ export class EgfrCalculator {
     const result =
       142 * minTerm ** genderFactors.ckdEpiA * maxTerm ** -1.2 * 0.9938 ** age * genderFactors.ckdEpi;
 
-    return new GfrResult((result * 100) / 100, "mL/min/1.73m²");
+    return new GfrResult((result * 100) / 100, "mL/min/1.73m²", "CKD-EPI");
   }
 
   public calculateCkdEpiForCystatin(cystatin: number, age: number, gender: GenderTypes) {
@@ -68,7 +68,7 @@ export class EgfrCalculator {
 
     let result = 133 * minTerm ** -0.499 * maxTerm ** -1.328 * 0.996 ** age * genderFactors.ckdEpiCys;
 
-    return new GfrResult(Math.round(result * 100) / 100, "ml/min/1.73m²");
+    return new GfrResult(Math.round(result * 100) / 100, "ml/min/1.73m²", "CKD-EPI");
   }
 
   public calculateCockcroftGault(
@@ -85,7 +85,7 @@ export class EgfrCalculator {
 
     const result = (ageResult / serumCreatinine) * weightResult * genderFactors.cockcroftGault;
 
-    return new GfrResult(Math.round(result * 100) / 100, "ml/min");
+    return new GfrResult(Math.round(result * 100) / 100, "ml/min", "Cockcroft-Gault");
   }
 
   private convertSerumCreatinineUnit(serumCreatinine: number, unit: CreatinineUnit) {
