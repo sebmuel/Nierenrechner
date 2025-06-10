@@ -13,7 +13,7 @@ export const appStyles = css`
     box-sizing: border-box;
     --app-theme-color: #89c58d;
     --app-secondary-color: #008bd2;
-    --app-tab-color: var(--app-secondary-color, #fff);
+    --app-theme-border-color: rgb(79, 118, 82);
   }
 
   *,

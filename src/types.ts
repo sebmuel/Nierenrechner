@@ -1,16 +1,22 @@
-import type {
-  IconDefinition,
-  IconName,
-} from "@fortawesome/fontawesome-svg-core";
+import type { IconName } from "@fortawesome/fontawesome-svg-core";
 import type { CalcResult } from "./classes/GfrResult";
-
 export const creatinineUnits = ["mg/dl", "µmol/l"] as const;
 export type CreatinineUnit = (typeof creatinineUnits)[number];
 export const genderTypes = ["männlich", "weiblich"] as const;
 export type GenderTypes = (typeof genderTypes)[number];
-
 export type CalcTypes = "MDRD" | "CKD-EPI" | "Mayo" | "Cockcroft-Gault";
 export type SkinColor = "black" | "white";
+export type Creatine = string;
+
+export type Classification = {
+  name: string;
+  description: string;
+  min: number;
+  max: number;
+  symptoms?: string;
+  measure?: string;
+  mark?: string;
+};
 
 /**
  * Event fired when a tab is selected
@@ -36,8 +42,15 @@ export class ResultEvent extends CustomEvent<CalcResult> {
 }
 
 export type CalculatorInputTypes = "text" | "number";
+export type CalculatorInputValues =
+  | string
+  | number
+  | GenderTypes
+  | SkinColor
+  | CreatinineUnit;
+
 export type CalculatorInputFields = {
-  icon: IconName;
-  type: CalculatorInputTypes;
-  value: string | number | GenderTypes | SkinColor | CreatinineUnit;
+  icon: IconName | undefined;
+  name: string;
+  value: CalculatorInputValues;
 };

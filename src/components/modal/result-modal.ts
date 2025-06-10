@@ -3,6 +3,7 @@ import { customElement, property } from "lit/decorators.js";
 import type { CalcResult } from "../../classes/GfrResult";
 import { appStyles } from "../../styles/app-styles";
 import "../result-header";
+import "../result-body";
 
 @customElement("result-modal")
 export class ResultModal extends LitElement {
@@ -117,7 +118,14 @@ export class ResultModal extends LitElement {
         <button class="close" @click=${this.close}>X</button>
       </div>
       <div class="content">
-        <result-header .fields=${this.result!.formData}></result-header>
+        <result-header
+          .classification=${this.result!.classification}
+          .fields=${this.result!.formData}
+        ></result-header>
+        <result-body
+          .score=${this.result?.value}
+          .classification=${this.result?.classification}
+        ></result-body>
       </div>
     </div>`;
   }

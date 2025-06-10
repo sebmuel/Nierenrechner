@@ -12,6 +12,7 @@ import {
 import { appStyles } from "../../styles/app-styles";
 import "../description";
 import { CalcResult } from "../../classes/GfrResult";
+import classificationService from "../../services/classification-service";
 
 @customElement("app-cmkd-epi-calculator")
 export default class CmkdEpiCalculator extends LitElement {
@@ -28,6 +29,12 @@ export default class CmkdEpiCalculator extends LitElement {
 
         gap: 10px;
         margin-bottom: 30px;
+      }
+
+      @media (max-width: 980px) {
+        .calc-inputs {
+          grid-template-columns: 1fr;
+        }
       }
     `,
   ];
@@ -55,7 +62,8 @@ export default class CmkdEpiCalculator extends LitElement {
       result.value,
       result.unit,
       result.calculatorType,
-      this.mapInputTypes(formData)
+      this.mapInputTypes(formData),
+      classificationService.getClassificationByScore(result.value)!
     );
 
     this.dispatchEvent(new ResultEvent("result", { detail: calcResult }));
@@ -64,19 +72,24 @@ export default class CmkdEpiCalculator extends LitElement {
   mapInputTypes(data: FormData): Record<string, CalculatorInputFields> {
     return {
       serumCreatinine: {
-        type: "text",
+        name: "serumCreatinine",
         value: data.get("serumCreatinine") as string,
         icon: "syringe",
       },
       age: {
-        type: "number",
+        name: "age",
         value: data.get("age") as string,
         icon: "birthday-cake",
       },
       gender: {
-        type: "text",
+        name: "gender",
         value: data.get("gender") as GenderTypes,
         icon: "mars-and-venus",
+      },
+      unit: {
+        name: "unit",
+        value: data.get("unit") as CreatinineUnit,
+        icon: undefined,
       },
     };
   }
@@ -109,6 +122,7 @@ export default class CmkdEpiCalculator extends LitElement {
             <div class="input-wrapper">
               <label for="unit">Einheit</label>
               <select id="unit" name="unit">
+                mark
                 ${creatinineUnits.map(
                   (unit) => html` <option value=${unit}>${unit}</option> `
                 )}
