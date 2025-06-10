@@ -1,4 +1,8 @@
-﻿import { type CreatinineUnit, type GenderTypes, type SkinColor } from "../types.ts";
+﻿import {
+  type CreatinineUnit,
+  type GenderTypes,
+  type SkinColor,
+} from "../types.ts";
 import { logger } from "./debugger-logger.ts";
 import { GenderFactors } from "../constants/genderFactors.ts";
 import { SkinColorFactors } from "../constants/skinColorFactors.ts";
@@ -23,7 +27,11 @@ export class EgfrCalculator {
       genderFactors.mdrd *
       skinColorFactors.mdrd;
 
-    return new GfrResult(Math.round(result * 100) / 100, "ml/min/1.73m²", "MDRD");
+    return new GfrResult(
+      Math.round(result * 100) / 100,
+      "ml/min/1.73m²",
+      "MDRD"
+    );
   }
 
   public calculateMayoQuadratic(
@@ -44,10 +52,20 @@ export class EgfrCalculator {
 
     let result = Math.exp(exponent);
     logger.log("result " + result);
-    return new GfrResult(Math.round(result * 100) / 100, "mL/min/1.73m²", "Mayo");
+    return new GfrResult(
+      Math.round(result * 100) / 100,
+      "mL/min/1.73m²",
+      "Mayo"
+    );
   }
 
-  public calculateCkdEpi(serumCreatinine: number, unit: CreatinineUnit, age: number, gender: GenderTypes) {
+  public calculateCkdEpi(
+    serumCreatinine: number,
+    unit: CreatinineUnit,
+    age: number,
+    gender: GenderTypes
+  ) {
+    debugger;
     serumCreatinine = this.convertSerumCreatinineUnit(serumCreatinine, unit);
     const genderFactors = GenderFactors[gender];
     const scOverK = serumCreatinine / genderFactors.ckdEpiK;
@@ -55,20 +73,37 @@ export class EgfrCalculator {
     const maxTerm = Math.max(scOverK, 1);
 
     const result =
-      142 * minTerm ** genderFactors.ckdEpiA * maxTerm ** -1.2 * 0.9938 ** age * genderFactors.ckdEpi;
+      142 *
+      minTerm ** genderFactors.ckdEpiA *
+      maxTerm ** -1.2 *
+      0.9938 ** age *
+      genderFactors.ckdEpi;
 
     return new GfrResult((result * 100) / 100, "mL/min/1.73m²", "CKD-EPI");
   }
 
-  public calculateCkdEpiForCystatin(cystatin: number, age: number, gender: GenderTypes) {
+  public calculateCkdEpiForCystatin(
+    cystatin: number,
+    age: number,
+    gender: GenderTypes
+  ) {
     const genderFactors = GenderFactors[gender];
     const cysOverK = cystatin / 0.8;
     const minTerm = Math.min(cysOverK, 1);
     const maxTerm = Math.max(cysOverK, 1);
 
-    let result = 133 * minTerm ** -0.499 * maxTerm ** -1.328 * 0.996 ** age * genderFactors.ckdEpiCys;
+    let result =
+      133 *
+      minTerm ** -0.499 *
+      maxTerm ** -1.328 *
+      0.996 ** age *
+      genderFactors.ckdEpiCys;
 
-    return new GfrResult(Math.round(result * 100) / 100, "ml/min/1.73m²", "CKD-EPI");
+    return new GfrResult(
+      Math.round(result * 100) / 100,
+      "ml/min/1.73m²",
+      "CKD-EPI"
+    );
   }
 
   public calculateCockcroftGault(
@@ -83,12 +118,22 @@ export class EgfrCalculator {
     const ageResult = 140 - age;
     const weightResult = weight / 72;
 
-    const result = (ageResult / serumCreatinine) * weightResult * genderFactors.cockcroftGault;
+    const result =
+      (ageResult / serumCreatinine) *
+      weightResult *
+      genderFactors.cockcroftGault;
 
-    return new GfrResult(Math.round(result * 100) / 100, "ml/min", "Cockcroft-Gault");
+    return new GfrResult(
+      Math.round(result * 100) / 100,
+      "ml/min",
+      "Cockcroft-Gault"
+    );
   }
 
-  private convertSerumCreatinineUnit(serumCreatinine: number, unit: CreatinineUnit) {
+  private convertSerumCreatinineUnit(
+    serumCreatinine: number,
+    unit: CreatinineUnit
+  ) {
     if (unit === "µmol/l") {
       serumCreatinine = serumCreatinine / 88.42;
       logger.log(`Converted SerumCreatinine to ${serumCreatinine} mg/dl`);

@@ -13,6 +13,8 @@ export type Classification = {
   description: string;
   min: number;
   max: number;
+  text: string;
+  grade: string;
   symptoms?: string;
   measure?: string;
   mark?: string;

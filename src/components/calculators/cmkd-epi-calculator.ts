@@ -22,10 +22,10 @@ export default class CmkdEpiCalculator extends LitElement {
       .calc-inputs {
         display: grid;
         grid-template-columns:
-          [serumCreatinine] minmax(min-content, 25%)
-          [unit] minmax(min-content, 10%)
-          [age] minmax(min-content, 10%)
-          [gender] minmax(min-content, 10%);
+          [serumCreatinine] minmax(max-content, 25%)
+          [unit] max-content
+          [age] max-content
+          [gender]max-content;
 
         gap: 10px;
         margin-bottom: 30px;
@@ -44,7 +44,7 @@ export default class CmkdEpiCalculator extends LitElement {
   submit(e: SubmitEvent) {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
-    const serumCreatinine = Number.parseInt(
+    const serumCreatinine = Number.parseFloat(
       formData.get("serumCreatinine") as string
     );
     const age = Number.parseInt(formData.get("age") as string);
@@ -54,7 +54,7 @@ export default class CmkdEpiCalculator extends LitElement {
     const result = this.calculator.calculateCkdEpi(
       serumCreatinine,
       unit,
-      Number(age),
+      age,
       gender
     );
 

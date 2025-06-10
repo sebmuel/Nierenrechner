@@ -14,6 +14,7 @@ export const appStyles = css`
     --app-theme-color: #89c58d;
     --app-secondary-color: #008bd2;
     --app-theme-border-color: rgb(79, 118, 82);
+    --app-gray: #d7d7d7;
   }
 
   *,
