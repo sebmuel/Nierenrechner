@@ -17,7 +17,13 @@ describe("EgfrCalculator", () => {
       const gender = "weiblich";
       const skinColor = "white";
 
-      const result = calculator.calculateMdrd(serumCreatinine, unit, age, gender, skinColor).value;
+      const result = calculator.calculateMdrd(
+        serumCreatinine,
+        unit,
+        age,
+        gender,
+        skinColor
+      ).value;
 
       const expected = 62.38;
 
@@ -30,10 +36,16 @@ describe("EgfrCalculator", () => {
       const serumCreatinine = 100;
       const unit = "µmol/l";
       const age = 50;
-      const gender = "maennlich";
+      const gender = "männlich";
       const skinColor = "black";
 
-      const result = calculator.calculateMdrd(serumCreatinine, unit, age, gender, skinColor).value;
+      const result = calculator.calculateMdrd(
+        serumCreatinine,
+        unit,
+        age,
+        gender,
+        skinColor
+      ).value;
 
       const expected = 88.4;
 
@@ -48,9 +60,14 @@ describe("EgfrCalculator", () => {
       const serumCreatinine = 1.2;
       const unit = "mg/dl";
       const age = 40;
-      const gender = "maennlich";
+      const gender = "männlich";
 
-      const result = calculator.calculateMayoQuadratic(serumCreatinine, unit, age, gender).value;
+      const result = calculator.calculateMayoQuadratic(
+        serumCreatinine,
+        unit,
+        age,
+        gender
+      ).value;
 
       const expected = 93.95;
 
@@ -66,7 +83,12 @@ describe("EgfrCalculator", () => {
       const age = 65;
       const gender = "weiblich";
 
-      const result = calculator.calculateCkdEpi(serumCreatinine, "mg/dl", age, gender).value;
+      const result = calculator.calculateCkdEpi(
+        serumCreatinine,
+        "mg/dl",
+        age,
+        gender
+      ).value;
 
       const expected = 70.95;
 
@@ -80,9 +102,13 @@ describe("EgfrCalculator", () => {
     it("should calculate correct value for 40 years old male with 1.1mg/l", () => {
       const cystatin = 1.1;
       const age = 40;
-      const gender = "maennlich";
+      const gender = "männlich";
 
-      const result = calculator.calculateCkdEpiForCystatin(cystatin, age, gender).value;
+      const result = calculator.calculateCkdEpiForCystatin(
+        cystatin,
+        age,
+        gender
+      ).value;
 
       const expected = 74.23;
 
@@ -100,7 +126,13 @@ describe("EgfrCalculator", () => {
       const weight = 65;
       const unit = "mg/dl";
 
-      const result = calculator.calculateCockcroftGault(serumCreatinine, unit, age, gender, weight).value;
+      const result = calculator.calculateCockcroftGault(
+        serumCreatinine,
+        unit,
+        age,
+        gender,
+        weight
+      ).value;
 
       const expected = 61.39;
 

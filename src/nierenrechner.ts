@@ -8,7 +8,7 @@ import "./components/tabs";
 import "./components/calculators/cmkd-epi-calculator";
 import "./components/modal/result-modal";
 import type { ResultModal } from "./components/modal/result-modal";
-import type { GfrResult } from "./classes/GfrResult";
+import type { CalcResult } from "./classes/GfrResult";
 
 @customElement("app-nierenrechner")
 export class Nierenrechner extends LitElement {
@@ -21,7 +21,9 @@ export class Nierenrechner extends LitElement {
         <div class="rechner">
           <app-tabs>
             <h2 slot="tab">CKD-EPI-Formel</h2>
-            <section slot="panel"><app-cmkd-epi-calculator /></section>
+            <section slot="panel">
+              <app-cmkd-epi-calculator></app-cmkd-epi-calculator>
+            </section>
             <h2 slot="tab">Tab 2 Tab 2</h2>
             <section slot="panel">Content for tab 2</section>
             <h2 slot="tab">Tab 3 Tab 2</h2>
@@ -43,8 +45,12 @@ export class Nierenrechner extends LitElement {
       logger.log(`Tab ${eventDetail.tabIndex} selected`);
     });
     this.addEventListener("result", (event: Event) => {
-      const eventDetail = (event as CustomEvent<GfrResult>).detail;
-      const modal = this.shadowRoot!.querySelector("result-modal") as ResultModal;
+      const eventDetail = (event as CustomEvent<CalcResult>).detail;
+      console.log(eventDetail);
+      const modal = this.shadowRoot!.querySelector(
+        "result-modal"
+      ) as ResultModal;
+
       modal.result = eventDetail;
       modal.open = true;
       modal.classList.add("open");

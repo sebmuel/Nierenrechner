@@ -26,7 +26,7 @@ export default class CmkdEpiCalculator extends LitElement {
           [age] minmax(min-content, 10%)
           [gender] minmax(min-content, 10%);
 
-        gap: 30px;
+        gap: 10px;
         margin-bottom: 30px;
       }
     `,
@@ -37,18 +37,48 @@ export default class CmkdEpiCalculator extends LitElement {
   submit(e: SubmitEvent) {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
-    const serumCreatinine = Number.parseInt(formData.get("serumCreatinine") as string);
+    const serumCreatinine = Number.parseInt(
+      formData.get("serumCreatinine") as string
+    );
     const age = Number.parseInt(formData.get("age") as string);
     const unit = formData.get("unit") as CreatinineUnit;
     const gender = formData.get("gender") as GenderTypes;
 
-    const inputs: Record<string, CalculatorInputFields> = {};
+    const result = this.calculator.calculateCkdEpi(
+      serumCreatinine,
+      unit,
+      Number(age),
+      gender
+    );
 
-    const result = this.calculator.calculateCkdEpi(serumCreatinine, unit, Number(age), gender);
-
-    const calcResult = new CalcResult(result.value, result.unit, result.calculatorType, inputs);
+    const calcResult = new CalcResult(
+      result.value,
+      result.unit,
+      result.calculatorType,
+      this.mapInputTypes(formData)
+    );
 
     this.dispatchEvent(new ResultEvent("result", { detail: calcResult }));
+  }
+
+  mapInputTypes(data: FormData): Record<string, CalculatorInputFields> {
+    return {
+      serumCreatinine: {
+        type: "text",
+        value: data.get("serumCreatinine") as string,
+        icon: "syringe",
+      },
+      age: {
+        type: "number",
+        value: data.get("age") as string,
+        icon: "birthday-cake",
+      },
+      gender: {
+        type: "text",
+        value: data.get("gender") as GenderTypes,
+        icon: "mars-and-venus",
+      },
+    };
   }
 
   render() {
@@ -57,8 +87,9 @@ export default class CmkdEpiCalculator extends LitElement {
         <calc-description>
           <h3 slot="headline">Berechnung der eGFR mit der CKD-EPI-Formel</h3>
           <p slot="description">
-            Die CKD-EPI-Formel (2021) schätzt die GFR genauer als die MDRD-Formel und ist insbesondere im
-            Grenzbereich von gesunder Funktion und beginnender Niereninsuffizienz noch zuverlässiger.
+            Die CKD-EPI-Formel (2021) schätzt die GFR genauer als die
+            MDRD-Formel und ist insbesondere im Grenzbereich von gesunder
+            Funktion und beginnender Niereninsuffizienz noch zuverlässiger.
           </p>
         </calc-description>
         <form @submit=${this.submit}>
@@ -78,7 +109,9 @@ export default class CmkdEpiCalculator extends LitElement {
             <div class="input-wrapper">
               <label for="unit">Einheit</label>
               <select id="unit" name="unit">
-                ${creatinineUnits.map((unit) => html` <option value=${unit}>${unit}</option> `)}
+                ${creatinineUnits.map(
+                  (unit) => html` <option value=${unit}>${unit}</option> `
+                )}
               </select>
             </div>
 
@@ -99,7 +132,9 @@ export default class CmkdEpiCalculator extends LitElement {
             <div class="input-wrapper">
               <label for="gender">Geschlecht</label>
               <select id="gender" name="gender">
-                ${genderTypes.map((gender) => html` <option value=${gender}>${gender}</option> `)}
+                ${genderTypes.map(
+                  (gender) => html` <option value=${gender}>${gender}</option> `
+                )}
               </select>
             </div>
           </div>

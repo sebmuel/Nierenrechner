@@ -1,7 +1,8 @@
 import { css, html, LitElement } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import type { GfrResult } from "../../classes/GfrResult";
+import type { CalcResult } from "../../classes/GfrResult";
 import { appStyles } from "../../styles/app-styles";
+import "../result-header";
 
 @customElement("result-modal")
 export class ResultModal extends LitElement {
@@ -54,7 +55,8 @@ export class ResultModal extends LitElement {
         font-weight: var(--app-modal-close-button-font-weight, 500);
         color: var(--app-modal-close-button-font-color, #000);
         width: 100;
-        transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+        transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out,
+          border-color 0.2s ease-in-out;
         cursor: pointer;
       }
 
@@ -71,7 +73,7 @@ export class ResultModal extends LitElement {
     `,
   ];
 
-  @property({ type: Object }) result?: GfrResult;
+  @property({ type: Object }) result?: CalcResult;
   @property({ type: Boolean }) open = false;
 
   close() {
@@ -114,7 +116,9 @@ export class ResultModal extends LitElement {
         <h5>Berechnung eGFR nach <span>${this.mapType()}</span></h5>
         <button class="close" @click=${this.close}>X</button>
       </div>
-      <div class="content">${this.result?.value}</div>
+      <div class="content">
+        <result-header .fields=${this.result!.formData}></result-header>
+      </div>
     </div>`;
   }
 }

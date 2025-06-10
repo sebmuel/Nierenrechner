@@ -1,8 +1,12 @@
+import type {
+  IconDefinition,
+  IconName,
+} from "@fortawesome/fontawesome-svg-core";
 import type { CalcResult } from "./classes/GfrResult";
 
 export const creatinineUnits = ["mg/dl", "µmol/l"] as const;
 export type CreatinineUnit = (typeof creatinineUnits)[number];
-export const genderTypes = ["maennlich", "weiblich"] as const;
+export const genderTypes = ["männlich", "weiblich"] as const;
 export type GenderTypes = (typeof genderTypes)[number];
 
 export type CalcTypes = "MDRD" | "CKD-EPI" | "Mayo" | "Cockcroft-Gault";
@@ -33,7 +37,7 @@ export class ResultEvent extends CustomEvent<CalcResult> {
 
 export type CalculatorInputTypes = "text" | "number";
 export type CalculatorInputFields = {
-  icon: string | undefined;
+  icon: IconName;
   type: CalculatorInputTypes;
-  value: string | number | ;
+  value: string | number | GenderTypes | SkinColor | CreatinineUnit;
 };

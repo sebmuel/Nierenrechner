@@ -1,5 +1,5 @@
 export const GenderFactors = {
-  maennlich: {
+  männlich: {
     mdrd: 1,
     mayoQuadratic: 0,
     ckdEpiK: 0.9,
