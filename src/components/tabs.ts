@@ -18,7 +18,6 @@ export class Tabs extends LitElement {
         border-bottom: 2px solid var(--app-gray, #fff);
         text-align: center;
         cursor: pointer;
-        margin-bottom: 5rem;
       }
       nav > ::slotted([slot="tab"][selected]) {
         border-color: var(--app-tab-color, #fff);

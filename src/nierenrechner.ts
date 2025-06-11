@@ -20,17 +20,17 @@ export class Nierenrechner extends LitElement {
         <result-modal></result-modal>
         <div class="rechner">
           <app-tabs>
-            <h2 slot="tab">CKD-EPI-Formel</h2>
+            <div slot="tab">CKD-EPI-Formel</div>
             <section slot="panel">
               <app-cmkd-epi-calculator></app-cmkd-epi-calculator>
             </section>
-            <h2 slot="tab">Tab 2 Tab 2</h2>
+            <div slot="tab">Tab 2 Tab 2</div>
             <section slot="panel">Content for tab 2</section>
-            <h2 slot="tab">Tab 3 Tab 2</h2>
+            <div slot="tab">Tab 3 Tab 2</div>
             <section slot="panel">Content for tab 3</section>
-            <h2 slot="tab">Tab 4 Tab 2</h2>
+            <div slot="tab">Tab 4 Tab 2</div>
             <section slot="panel">Content for tab 4</section>
-            <h2 slot="tab">Tab 5 Tab 2</h2>
+            <div slot="tab">Tab 5 Tab 2</div>
             <section slot="panel">Content for tab 5</section>
           </app-tabs>
         </div>
@@ -47,9 +47,7 @@ export class Nierenrechner extends LitElement {
     this.addEventListener("result", (event: Event) => {
       const eventDetail = (event as CustomEvent<CalcResult>).detail;
       console.log(eventDetail);
-      const modal = this.shadowRoot!.querySelector(
-        "result-modal"
-      ) as ResultModal;
+      const modal = this.shadowRoot!.querySelector("result-modal") as ResultModal;
 
       modal.result = eventDetail;
       modal.open = true;

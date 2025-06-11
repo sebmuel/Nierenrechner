@@ -8,15 +8,15 @@ export const appStyles = css`
   :host {
     display: inline-block;
     width: 100%;
-
     margin: 0 auto;
     box-sizing: border-box;
-    --app-theme-color: #89c58d;
+    --app-theme-color: #eaf4ea;
     --app-secondary-color: #008bd2;
+    --app-theme-color-dark: #89c58d;
+    --app-tab-color: var(--app-theme-color-dark);
     --app-theme-border-color: rgb(79, 118, 82);
-    --app-gray: #d7d7d7;
+    --app-gray: #606060;
     --app-max-width: 1000px;
-    --app-tab-color: var(--app-secondary-color);
   }
 
   #nierenrechner {
@@ -38,13 +38,14 @@ export const appStyles = css`
   h6 {
     margin: 0 0 0.5rem 0;
     font-weight: 600;
+    color: var(--app-headline-color, #000);
   }
 
   p {
     font-size: var(--app-paragraph-font-size, 1rem);
-    line-height: var(--app-paragraph-line-height, 1.2);
+    line-height: var(--app-paragraph-line-height, 1.3);
     font-weight: var(--app-paragraph-font-weight, 400);
-    color: var(--app-paragraph-font-color, #fff);
+    color: var(--app-paragraph-font-color, var(--app-gray));
   }
 
   p,
@@ -53,7 +54,7 @@ export const appStyles = css`
   }
 
   .calc-wrapper {
-    padding: 36px;
+    padding: 36px 0;
     display: block;
     width: 100%;
   }
