@@ -8,13 +8,20 @@ export const appStyles = css`
   :host {
     display: inline-block;
     width: 100%;
-    max-width: var(--app-max-width, 100%);
+
     margin: 0 auto;
     box-sizing: border-box;
     --app-theme-color: #89c58d;
     --app-secondary-color: #008bd2;
     --app-theme-border-color: rgb(79, 118, 82);
     --app-gray: #d7d7d7;
+    --app-max-width: 1000px;
+    --app-tab-color: var(--app-secondary-color);
+  }
+
+  #nierenrechner {
+    max-width: var(--app-max-width, 100%);
+    margin: 0 auto;
   }
 
   *,
@@ -69,8 +76,7 @@ export const appStyles = css`
   .input-wrapper select {
     background-color: var(--app-input-background-color, #ffffff);
     outline: none;
-    border: var(--app-input-border-width, 1px) solid
-      var(--app-input-border-color-rgb, rgb(0, 0, 0));
+    border: var(--app-input-border-width, 1px) solid var(--app-input-border-color-rgb, rgb(0, 0, 0));
     border-radius: var(--app-input-border-radius, 5px);
     padding: 10px;
     font-size: var(--app-input-font-size, 1.2rem);
@@ -80,10 +86,7 @@ export const appStyles = css`
   }
 
   .calc-wrapper button[type="submit"] {
-    background-color: var(
-      --app-button-background-color,
-      var(--app-secondary-color)
-    );
+    background-color: var(--app-button-background-color, var(--app-secondary-color));
     appearance: none;
     outline: none;
     border: var(--app-button-border-width, 1px) solid
@@ -94,8 +97,7 @@ export const appStyles = css`
     font-weight: var(--app-button-font-weight, 500);
     color: var(--app-button-font-color, #000);
     width: 100;
-    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out,
-      border-color 0.2s ease-in-out;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out;
     cursor: pointer;
   }
 

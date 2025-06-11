@@ -33,6 +33,8 @@ export class ResultModal extends LitElement {
         border-radius: 5px;
         padding: 20px;
         width: 100%;
+        max-height: 95vh;
+        overflow-y: auto;
         max-width: var(--app-modal-max-width, 1000px);
         color: var(--app-modal-font-color, #000);
       }
@@ -49,15 +51,14 @@ export class ResultModal extends LitElement {
         appearance: none;
         outline: none;
         border: var(--app-modal-close-button-border-width, 1px) solid
-          var(--app-modal-close-button-border-color-rgb, rgb(0, 0, 0));
+          var(--app-modal-close-button-border-color-rgb, transparent);
         border-radius: var(--app-modal-close-button-border-radius, 5px);
         padding: 5px;
         font-size: var(--app-modal-close-button-font-size, 1rem);
         font-weight: var(--app-modal-close-button-font-weight, 500);
         color: var(--app-modal-close-button-font-color, #000);
         width: 100;
-        transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out,
-          border-color 0.2s ease-in-out;
+        transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out;
         cursor: pointer;
       }
 
@@ -84,7 +85,9 @@ export class ResultModal extends LitElement {
   }
 
   private backdropClick(e: MouseEvent) {
-    if (e.target === this) {
+    const path = e.composedPath();
+    const modalEl = this.renderRoot.querySelector(".modal");
+    if (modalEl && !path.includes(modalEl)) {
       this.close();
     }
   }

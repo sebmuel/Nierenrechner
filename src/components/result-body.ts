@@ -22,24 +22,22 @@ export default class ResultBody extends LitElement {
 
   render() {
     return html`<div class="result">
-      <h5>Ihr Ergebnis</h5>
-      <div class="classification">
-        <div class="left">${this.renderValue(this.score)}</div>
-        <div class="right">${this.renderGrade(this.classification!.grade)}</div>
-      </div>
-      <div>
-        <grade-descriptions
-          .measure=${this.classification!.measure}
-          .symtoms=${this.classification!.symptoms}
-          .mark=${this.classification!.mark}
-        ></grade-descriptions>
-        <div class="classification-list">
-          <classification-list
-            .classifications=${classifications}
-          ></classification-list>
+        <h5>Ihr Ergebnis</h5>
+        <div class="classification">
+          <div class="left">${this.renderValue(this.score)}</div>
+          <div class="right">${this.renderGrade(this.classification!.grade)}</div>
+        </div>
+        <div>
+          <grade-descriptions
+            .measure=${this.classification!.measure}
+            .symtoms=${this.classification!.symptoms}
+            .mark=${this.classification!.mark}
+          ></grade-descriptions>
         </div>
       </div>
-    </div>`;
+      <div class="classification-list">
+        <classification-list .classifications=${classifications}></classification-list>
+      </div>`;
   }
 
   static styles = [
@@ -86,6 +84,7 @@ export default class ResultBody extends LitElement {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        margin-bottom: 15px;
       }
 
       .left,

@@ -10,7 +10,7 @@ export class DescriptionElement extends LitElement {
 
     #decription ::slotted([slot="headline"]) {
       font-size: var(--app-description-headline-font-size, 2rem);
-      color: var(--app-description-headline-color, var(--app-secondary-color));
+      color: var(--app-description-headline-color, #fff);
       font-weight: var(--app-description-headline-font-weight, 600);
     }
   `;

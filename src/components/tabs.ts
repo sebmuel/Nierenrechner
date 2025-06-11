@@ -12,16 +12,16 @@ export class Tabs extends LitElement {
         display: flex;
       }
       nav > ::slotted([slot="tab"]) {
-        padding: 1rem 2rem;
+        padding: 1rem 1rem;
         flex: 1 1 auto;
         color: var(--app-tab-color, #fff);
-        border-bottom: 2px solid #fff;
+        border-bottom: 2px solid var(--app-gray, #fff);
         text-align: center;
         cursor: pointer;
         margin-bottom: 5rem;
       }
       nav > ::slotted([slot="tab"][selected]) {
-        border-color: black;
+        border-color: var(--app-tab-color, #fff);
       }
       ::slotted([slot="panel"]) {
         display: none;
@@ -36,12 +36,8 @@ export class Tabs extends LitElement {
   private _panels: HTMLElement[] = [];
 
   firstUpdated() {
-    const slotTabs = this.shadowRoot!.querySelector(
-      'slot[name="tab"]'
-    ) as HTMLSlotElement;
-    const slotPanels = this.shadowRoot!.querySelector(
-      'slot[name="panel"]'
-    ) as HTMLSlotElement;
+    const slotTabs = this.shadowRoot!.querySelector('slot[name="tab"]') as HTMLSlotElement;
+    const slotPanels = this.shadowRoot!.querySelector('slot[name="panel"]') as HTMLSlotElement;
 
     this._tabs = slotTabs.assignedElements({ flatten: true }) as HTMLElement[];
     this._panels = slotPanels.assignedElements({
@@ -64,9 +60,7 @@ export class Tabs extends LitElement {
   }
 
   private handleSelect(event: Event) {
-    const clickedTab = event
-      .composedPath()
-      .find((el) => this._tabs.includes(el as HTMLElement)) as
+    const clickedTab = event.composedPath().find((el) => this._tabs.includes(el as HTMLElement)) as
       | HTMLElement
       | undefined;
 

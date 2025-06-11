@@ -72,7 +72,7 @@ export class ResultHeader extends LitElement {
     if (!this.fields) {
       return;
     }
-    console.log(this.classification);
+
     return html`
       <div class="data">
         ${Object.entries(this.fields).map(([key, field]) => {
@@ -83,9 +83,7 @@ export class ResultHeader extends LitElement {
             <div class="data-point">
               <h6>${this.#fieldMapper.map(key)}</h6>
               <div class="data-value">
-                ${faIcon
-                  ? html`<svg>${unsafeHTML(faIcon.html.join(""))}</svg>`
-                  : nothing}
+                ${faIcon ? html`<svg>${unsafeHTML(faIcon.html.join(""))}</svg>` : nothing}
                 <span>${this.parseValue(field)}</span>
               </div>
             </div>

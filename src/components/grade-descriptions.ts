@@ -44,8 +44,10 @@ export default class GradeDesciptions extends LitElement {
 
       .description {
         padding: 10px;
-        background-color: var(--app-gray);
+        background-color: var(--app-theme-color);
         border-radius: 5px;
+      }
+      .description:not(:last-child) {
         margin-bottom: 10px;
       }
     `,
