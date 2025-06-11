@@ -11,15 +11,6 @@ export default class ResultBody extends LitElement {
   @property({ type: Object }) private classification?: Classification;
   @property({ type: Number }) private score = 0;
 
-  private renderValue(value: number) {
-    return html`<div class="bold">${value} ml/min/1.73 m2</div>`;
-  }
-
-  private renderGrade(grade: string) {
-    return html`<div class="bold">${grade}</div>
-      <span class="grade-text">${this.classification!.text}</span>`;
-  }
-
   renderResultTable() {
     return html` <table class="result-table">
       <tr>
