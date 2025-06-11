@@ -12,21 +12,46 @@ export default class ResultBody extends LitElement {
   @property({ type: Number }) private score = 0;
 
   private renderValue(value: number) {
-    return html`<p>eGFR: <b>${value}</b> ml/min/1.73 m2</p>`;
+    return html`<div class="bold">${value} ml/min/1.73 m2</div>`;
   }
 
   private renderGrade(grade: string) {
-    return html`<p>KDOQI: ${grade}</p>
+    return html`<div class="bold">${grade}</div>
       <span class="grade-text">${this.classification!.text}</span>`;
+  }
+
+  renderResultTable() {
+    return html` <table class="result-table">
+      <tr>
+        <th>Bezeichnung</th>
+        <th>Wert</th>
+      </tr>
+      <tr>
+        <td>eGFR</td>
+        <td>${this.score} ml/min/1.73 m²</td>
+      </tr>
+      <tr>
+        <td>Zustand</td>
+        <td>
+          <div>${this.classification?.description}</div>
+        </td>
+      </tr>
+      <tr>
+        <td>KDOQI</td>
+        <td>
+          <div>
+            ${this.classification?.grade}
+            <div class="grade-text">${this.classification?.text}</div>
+          </div>
+        </td>
+      </tr>
+    </table>`;
   }
 
   render() {
     return html`<div class="result">
         <h5>Ihr Ergebnis</h5>
-        <div class="classification">
-          <div class="left">${this.renderValue(this.score)}</div>
-          <div class="right">${this.renderGrade(this.classification!.grade)}</div>
-        </div>
+        <div class="classification">${this.renderResultTable()}</div>
         <div>
           <grade-descriptions
             .measure=${this.classification!.measure}
@@ -43,6 +68,19 @@ export default class ResultBody extends LitElement {
   static styles = [
     appStyles,
     css`
+      .classification-result {
+        display: flex;
+        justify-content: flex-start;
+        gap: 10px;
+        font-size: 20px;
+      }
+
+      .classification-result .key {
+        width: 100%;
+        max-width: 100px;
+        font-weight: bold;
+      }
+
       p {
         margin: 0;
         font-size: inherit;
@@ -82,8 +120,7 @@ export default class ResultBody extends LitElement {
 
       .classification {
         display: flex;
-        flex-direction: row;
-        justify-content: space-between;
+        flex-direction: column;
         margin-bottom: 15px;
       }
 
@@ -101,6 +138,33 @@ export default class ResultBody extends LitElement {
 
       .right {
         align-items: flex-end;
+      }
+      .result-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+        font-size: 1rem;
+      }
+
+      .result-table th,
+      .result-table td {
+        border: 1px solid #ccc;
+        padding: 10px;
+        text-align: left;
+      }
+
+      .result-table th {
+        background-color: #f5f5f5;
+        font-weight: 600;
+      }
+
+      .bold {
+        font-weight: 600;
+      }
+
+      .grade-text {
+        font-size: 0.9rem;
+        color: #777;
       }
     `,
   ];

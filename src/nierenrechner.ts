@@ -24,14 +24,16 @@ export class Nierenrechner extends LitElement {
             <section slot="panel">
               <app-cmkd-epi-calculator></app-cmkd-epi-calculator>
             </section>
-            <div slot="tab">Tab 2 Tab 2</div>
+            <div slot="tab">MDRD eGFR-Formel</div>
             <section slot="panel">Content for tab 2</section>
-            <div slot="tab">Tab 3 Tab 2</div>
+            <div slot="tab">Mayo eGFR-Formel</div>
             <section slot="panel">Content for tab 3</section>
-            <div slot="tab">Tab 4 Tab 2</div>
+            <div slot="tab">CKD-EPI-Formel für Cystatin C</div>
             <section slot="panel">Content for tab 4</section>
-            <div slot="tab">Tab 5 Tab 2</div>
+            <div slot="tab">CKD-EPI-Formel für Kreatinin & Cystatin C</div>
             <section slot="panel">Content for tab 5</section>
+            <div slot="tab">Cockcroft und Gault</div>
+            <section slot="panel">Content for tab 6</section>
           </app-tabs>
         </div>
       </div>

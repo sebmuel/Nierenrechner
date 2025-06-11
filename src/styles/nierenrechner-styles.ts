@@ -2,7 +2,7 @@ import { css } from "lit";
 
 export const nierenrechnerStyles = css`
   div[slot="tab"] {
-    font-size: var(--app-tab-font-size, 1.4rem);
+    font-size: var(--app-tab-font-size, 1rem);
     font-weight: bold;
   }
 

@@ -36,7 +36,7 @@ export class ResultHeader extends LitElement {
         width: var(--svg-size);
         height: var(--svg-size);
         display: block;
-        color: var(--app-theme-color);
+        color: var(--app-theme-color-dark);
       }
 
       .data-value {

@@ -8,11 +8,15 @@ export class Tabs extends LitElement {
   static styles = [
     appStyles,
     css`
+      :host {
+        --app-tab-color: var(--app-theme-color-dark);
+      }
+
       nav {
         display: flex;
       }
       nav > ::slotted([slot="tab"]) {
-        padding: 1rem 1rem;
+        padding: 1rem 0.5rem;
         flex: 1 1 auto;
         color: var(--app-tab-color, #fff);
         border-bottom: 2px solid var(--app-gray, #fff);
