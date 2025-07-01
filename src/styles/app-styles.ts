@@ -38,7 +38,7 @@ export const appStyles = css`
   h6 {
     margin: 0 0 0.5rem 0;
     font-weight: 600;
-    color: var(--app-headline-color, #ffffff);
+    color: var(--app-headline-color, #0089D2);
   }
 
   p {
