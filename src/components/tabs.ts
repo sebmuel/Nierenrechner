@@ -1,7 +1,7 @@
-import { TabSelectedEvent } from "./../types";
-import { css, html, LitElement } from "lit";
-import { customElement } from "lit/decorators.js";
-import { appStyles } from "../styles/app-styles";
+import {TabSelectedEvent} from "./../types";
+import {css, html, LitElement} from "lit";
+import {customElement} from "lit/decorators.js";
+import {appStyles} from "../styles/app-styles";
 
 @customElement("app-tabs")
 export class Tabs extends LitElement {
@@ -19,7 +19,7 @@ export class Tabs extends LitElement {
         padding: 1rem 0.5rem;
         flex: 1 1 auto;
         color: var(--app-tab-color, #fff);
-        border-bottom: 2px solid var(--app-gray, #fff);
+        border-bottom: 2px solid var(--app-white, #fff);
         text-align: center;
         cursor: pointer;
       }

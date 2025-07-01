@@ -1,4 +1,4 @@
-import { css } from "lit";
+import {css} from "lit";
 
 export const appStyles = css`
   .nierenrechner {
@@ -10,11 +10,12 @@ export const appStyles = css`
     width: 100%;
     margin: 0 auto;
     box-sizing: border-box;
-    --app-theme-color: #eaf4ea;
+    --app-theme-color: #85b9d4;
     --app-secondary-color: #008bd2;
-    --app-theme-color-dark: #89c58d;
+    --app-theme-color-dark: #008AD2;
     --app-theme-border-color: rgb(79, 118, 82);
     --app-gray: #606060;
+    --app-white: #ffffff;
     --app-max-width: 1000px;
   }
 
@@ -37,14 +38,14 @@ export const appStyles = css`
   h6 {
     margin: 0 0 0.5rem 0;
     font-weight: 600;
-    color: var(--app-headline-color, #000);
+    color: var(--app-headline-color, #ffffff);
   }
 
   p {
     font-size: var(--app-paragraph-font-size, 1rem);
     line-height: var(--app-paragraph-line-height, 1.3);
     font-weight: var(--app-paragraph-font-weight, 400);
-    color: var(--app-paragraph-font-color, var(--app-gray));
+    color: var(--app-paragraph-font-color, var(--app-white));
   }
 
   p,
@@ -67,7 +68,7 @@ export const appStyles = css`
   .input-wrapper label {
     font-size: var(--app-input-label-font-size, 1rem);
     font-weight: var(--app-input-label-font-weight, 400);
-    color: var(--app-input-label-font-color, var(--app-gray));
+    color: var(--app-input-label-font-color, var(--app-white));
     margin-bottom: 5px;
   }
 

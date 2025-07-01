@@ -1,5 +1,5 @@
-import { LitElement, html, css } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import {css, html, LitElement} from "lit";
+import {customElement, property} from "lit/decorators.js";
 
 @customElement("accessible-accordion")
 export class AccessibleAccordion extends LitElement {
@@ -12,7 +12,7 @@ export class AccessibleAccordion extends LitElement {
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
     }
     .accordion-header {
-      background-color: #f7f7f7;
+      background-color: #ffffff;
       color: var(--app-secondary-color);
       cursor: pointer;
       padding: 18px;
@@ -24,7 +24,7 @@ export class AccessibleAccordion extends LitElement {
       font-size: 1.1rem;
     }
     .accordion-header[aria-expanded="true"] {
-      background-color: #ddd;
+      background-color: #ffffff;
     }
     .accordion-content {
       background-color: white;

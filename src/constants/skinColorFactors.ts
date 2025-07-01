@@ -1,8 +1,8 @@
 export const SkinColorFactors = {
-    black: {
+    schwarz: {
         mdrd: 1.212
     },
-    white: {
+    weiß: {
         mdrd: 1
     }
 }as const;

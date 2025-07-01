@@ -7,6 +7,9 @@ export const GenderFactors = {
     ckdEpi: 1,
     ckdEpiCys: 1,
     cockcroftGault: 1,
+    ckdEpiCreatinineCystatin: 1.012,
+    ckdEpiCreatinineCystatinK: 0.9,
+    ckdEpiCreatinineCystatinAlpha: -0.602,
   },
   weiblich: {
     mdrd: 0.742,
@@ -16,5 +19,8 @@ export const GenderFactors = {
     ckdEpi: 1.012,
     ckdEpiCys: 0.932,
     cockcroftGault: 0.85,
+    ckdEpiCreatinineCystatin: 1,
+    ckdEpiCreatinineCystatinK: 0.7,
+    ckdEpiCreatinineCystatinAlpha: -0.248,
   },
 } as const;

@@ -1,7 +1,7 @@
-import { css, html, LitElement } from "lit";
-import { customElement, property } from "lit/decorators.js";
-import type { CalcResult } from "../../classes/GfrResult";
-import { appStyles } from "../../styles/app-styles";
+import {css, html, LitElement} from "lit";
+import {customElement, property} from "lit/decorators.js";
+import type {CalcResult} from "../../classes/GfrResult";
+import {appStyles} from "../../styles/app-styles";
 import "../result-header";
 import "../result-body";
 
@@ -108,6 +108,14 @@ export class ResultModal extends LitElement {
         return html`CKD-EPI-Formel`;
       case "MDRD":
         return html`MDRD-Formel`;
+      case "Mayo":
+        return html`Mayo-Formel`;
+      case "CKD-EPI-Cystatin":
+        return html`CKD-EPI-Formel für Cystatin C`;
+      case "CKD-EPI-Cystatin-Kreatinin":
+        return html`CKD-EPI-Formel für Kreatinin & Cystatin C`;
+      case "Cockcroft-Gault":
+        return html`Cockcroft-Gault-Formel`;
       default:
         throw new Error("Unknown calculator type");
     }
