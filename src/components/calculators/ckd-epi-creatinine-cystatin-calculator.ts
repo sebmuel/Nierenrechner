@@ -115,7 +115,7 @@ export default class CkdEpiCreatinineCystatinCalculator extends LitElement {
         return html`
       <div class="calc-wrapper">
         <calc-description>
-          <h3 slot="headline">Berechnung der eGFR mit der CKD-EPI-für-Cystatin-Formel</h3>
+          <h3 slot="headline">Berechnung der eGFR mit der CKD-EPI-Kreatinin-Cystatin-C-Formel</h3>
           <p slot="description">
               Die CKD-EPI Kreatinin-Cystatin-C-Formel (2021) gilt allgemein als die genaueste und wird von den meisten Laboren empfohlen. 
               Sie ist geschlechtsspezifisch und berücksichtigt Alter, Kreatinin- und Cystatin-C-Werte.

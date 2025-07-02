@@ -1,10 +1,10 @@
-import { appStyles } from "./../styles/app-styles";
-import { css, html, LitElement, nothing } from "lit";
-import { customElement, property } from "lit/decorators.js";
-import type { CalculatorInputFields, Classification } from "../types";
+import {appStyles} from "./../styles/app-styles";
+import {css, html, LitElement, nothing} from "lit";
+import {customElement, property} from "lit/decorators.js";
+import type {CalculatorInputFields, Classification} from "../types";
 import FieldMapper from "../services/field-mapper";
-import { iconService } from "../services/icon-service";
-import { unsafeHTML } from "lit/directives/unsafe-html.js";
+import {iconService} from "../services/icon-service";
+import {unsafeHTML} from "lit/directives/unsafe-html.js";
 
 @customElement("result-header")
 export class ResultHeader extends LitElement {
@@ -62,8 +62,13 @@ export class ResultHeader extends LitElement {
   ];
 
   parseValue(field: CalculatorInputFields) {
-    if (field.name === "serumCreatinine") {
-      return (field.value as string) + " " + this.fields["unit"].value;
+
+    if(field.name === "serumCystatin" && this.fields["cysUnit"].value === undefined) {
+      return (field.value as string) + " " + this.fields["cysUnit"].value;
+    }
+    
+    if (field.name === "serumCreatinine" && this.fields["scUnit"].value === undefined) {
+      return (field.value as string) + " " + this.fields["scUnit"].value;
     }
     return field.value;
   }

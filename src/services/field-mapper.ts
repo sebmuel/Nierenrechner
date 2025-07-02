@@ -5,6 +5,7 @@ export default class FieldMapper {
     weight: "Gewicht (kg)",
     height: "Größe (cm)",
     serumCreatinine: "Kreatinin im Serum",
+    serumCystatin: "Cystatin im Serum",
     skinColor: "Hautfarbe",
     unit: "Einheit",
     cystatin: "Cystatin C",
