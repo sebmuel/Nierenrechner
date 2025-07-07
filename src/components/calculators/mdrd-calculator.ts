@@ -51,13 +51,13 @@ export default class MdrdCalculator extends LitElement {
             formData.get("serumCreatinine") as string
         );
         const age = Number.parseInt(formData.get("age") as string);
-        const unit = formData.get("unit") as CreatinineUnit;
+        const scUnit = formData.get("scUnit") as CreatinineUnit;
         const gender = formData.get("gender") as GenderTypes;
         const skinColor = formData.get("skinColor") as SkinColor;
 
         const result = this.calculator.calculateMdrd(
             serumCreatinine,
-            unit,
+            scUnit,
             age,
             gender,
             skinColor
@@ -91,9 +91,9 @@ export default class MdrdCalculator extends LitElement {
                 value: data.get("gender") as GenderTypes,
                 icon: "mars-and-venus",
             },
-            unit: {
-                name: "unit",
-                value: data.get("unit") as CreatinineUnit,
+            scUnit: {
+                name: "scUnit",
+                value: data.get("scUnit") as CreatinineUnit,
                 icon: undefined,
             },
             skinColor: {
@@ -129,8 +129,8 @@ export default class MdrdCalculator extends LitElement {
               />
             </div>
             <div class="input-wrapper">
-              <label for="unit">Einheit</label>
-              <select id="unit" name="unit">
+              <label for="scUnit">Einheit</label>
+              <select id="scUnit" name="scUnit">
                 mark
                 ${creatinineUnits.map(
             (unit) => html` <option value=${unit}>${unit}</option> `

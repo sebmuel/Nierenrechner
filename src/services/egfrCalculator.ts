@@ -1,4 +1,4 @@
-﻿import {type CreatinineUnit, type CystatinUnit, type GenderTypes, type SkinColor} from "../types.ts";
+﻿import {type CreatinineUnit, type GenderTypes, type SkinColor} from "../types.ts";
 import {logger} from "./debugger-logger.ts";
 import {GenderFactors} from "../constants/genderFactors.ts";
 import {SkinColorFactors} from "../constants/skinColorFactors.ts";
@@ -60,8 +60,7 @@ export class EgfrCalculator {
         return new GfrResult(Math.round(result * 100) / 100, "mL/min/1.73m²", "CKD-EPI");
     }
 
-    public calculateCkdEpiForCystatin(serumCystatin: number, unit: any, age: number, gender: GenderTypes) {
-        serumCystatin = this.convertSerumCystatinUnit(serumCystatin, unit);
+    public calculateCkdEpiForCystatin(serumCystatin: number, age: number, gender: GenderTypes) {
         const genderFactors = GenderFactors[gender];
         const cysOverK = serumCystatin / 0.8;
         const minTerm = Math.min(cysOverK, 1);
@@ -69,19 +68,17 @@ export class EgfrCalculator {
 
         let result = 133 * minTerm ** -0.499 * maxTerm ** -1.328 * 0.996 ** age * genderFactors.ckdEpiCys;
 
-        return new GfrResult(Math.round(result * 100) / 100, "ml/min/1.73m²", "CKD-EPI");
+        return new GfrResult(Math.round(result * 100) / 100, "ml/min/1.73m²", "CKD-EPI-Cystatin");
     }
 
     public calculateCkdEpiForCreatinineAndCystatin(
         serumCreatinine: number,
         scUnit: CreatinineUnit,
         serumCystatin: number,
-        cysUnit: CystatinUnit,
         gender: GenderTypes,
         age: number
     ) {
         serumCreatinine = this.convertSerumCreatinineUnit(serumCreatinine, scUnit);
-        serumCystatin = this.convertSerumCystatinUnit(serumCystatin, cysUnit);
         const genderFactors = GenderFactors[gender];
         const alpha = genderFactors.ckdEpiCreatinineCystatinAlpha;
         const scOverK = serumCreatinine / genderFactors.ckdEpiCreatinineCystatinK;
@@ -120,13 +117,5 @@ export class EgfrCalculator {
             logger.log(`Converted SerumCreatinine to ${serumCreatinine} mg/dl`);
         }
         return serumCreatinine;
-    }
-
-    private convertSerumCystatinUnit(serumCystatin: number, unit: CystatinUnit) {
-        if (unit === "µmol/l") {
-            //TODO Add the conversion
-            logger.log(`Converted SerumCystatin to ${serumCystatin} mg/dl`);
-        }
-        return serumCystatin;
     }
 }

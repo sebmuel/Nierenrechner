@@ -62,7 +62,7 @@ export class ResultHeader extends LitElement {
   ];
 
   parseValue(field: CalculatorInputFields) {
-
+  debugger;
     if(field.name === "serumCystatin" && this.fields["cysUnit"].value === undefined) {
       return (field.value as string) + " " + this.fields["cysUnit"].value;
     }

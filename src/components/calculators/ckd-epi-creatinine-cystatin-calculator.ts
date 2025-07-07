@@ -6,6 +6,7 @@ import {
     type CreatinineUnit,
     creatinineUnits,
     type CystatinUnit,
+    cystatinUnits,
     type GenderTypes,
     genderTypes,
     ResultEvent,
@@ -52,7 +53,6 @@ export default class CkdEpiCreatinineCystatinCalculator extends LitElement {
         );
         const age = Number.parseInt(formData.get("age") as string);
         const scUnit = formData.get("scUnit") as CreatinineUnit;
-        const cysUnit = formData.get("cysUnit") as CystatinUnit;
         const gender = formData.get("gender") as GenderTypes;
         
         
@@ -60,7 +60,6 @@ export default class CkdEpiCreatinineCystatinCalculator extends LitElement {
             serumCreatinine,
             scUnit,
             serumCystatin,
-            cysUnit,
             gender,
             age
         );
@@ -175,7 +174,7 @@ export default class CkdEpiCreatinineCystatinCalculator extends LitElement {
                   <label for="cysUnit">Einheit</label>
                   <select id="cysUnit" name="cysUnit">
                       mark
-                      ${creatinineUnits.map(
+                      ${cystatinUnits.map(
                               (unit) => html` <option value=${unit}>${unit}</option> `
                       )}
                   </select>

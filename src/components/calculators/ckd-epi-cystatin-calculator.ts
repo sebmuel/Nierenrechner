@@ -3,8 +3,8 @@ import {customElement} from "lit/decorators.js";
 import {EgfrCalculator} from "../../services/egfrCalculator";
 import {
   type CalculatorInputFields,
-  type CreatinineUnit,
-  creatinineUnits,
+  type CystatinUnit,
+  cystatinUnits,
   genderTypes,
   type GenderTypes,
   ResultEvent,
@@ -22,7 +22,7 @@ export default class ckdEpiCystatinCalculator extends LitElement {
       .calc-inputs {
         display: grid;
         grid-template-columns:
-          [serumCreatinine] minmax(max-content, 25%)
+          [serumCystatin] minmax(max-content, 25%)
           [unit] max-content
           [age] max-content
           [gender]max-content;
@@ -44,16 +44,14 @@ export default class ckdEpiCystatinCalculator extends LitElement {
   submit(e: SubmitEvent) {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
-    const serumCreatinine = Number.parseFloat(
-      formData.get("serumCreatinine") as string
+    const serumCystatin = Number.parseFloat(
+      formData.get("serumCystatin") as string
     );
     const age = Number.parseInt(formData.get("age") as string);
-    const unit = formData.get("unit") as CreatinineUnit;
     const gender = formData.get("gender") as GenderTypes;
 
     const result = this.calculator.calculateCkdEpiForCystatin(
-      serumCreatinine,
-      unit,
+      serumCystatin,
       age,
       gender
     );
@@ -71,9 +69,9 @@ export default class ckdEpiCystatinCalculator extends LitElement {
 
   mapInputTypes(data: FormData): Record<string, CalculatorInputFields> {
     return {
-      serumCreatinine: {
-        name: "serumCreatinine",
-        value: data.get("serumCreatinine") as string,
+      serumCystatin: {
+        name: "serumCystatin",
+        value: data.get("serumCystatin") as string,
         icon: "syringe",
       },
       age: {
@@ -86,9 +84,9 @@ export default class ckdEpiCystatinCalculator extends LitElement {
         value: data.get("gender") as GenderTypes,
         icon: "mars-and-venus",
       },
-      unit: {
-        name: "unit",
-        value: data.get("unit") as CreatinineUnit,
+      cysUnit: {
+        name: "cysUnit",
+        value: data.get("cysUnit") as CystatinUnit,
         icon: undefined,
       },
     };
@@ -98,7 +96,7 @@ export default class ckdEpiCystatinCalculator extends LitElement {
     return html`
       <div class="calc-wrapper">
         <calc-description>
-          <h3 slot="headline">Berechnung der eGFR mit der CKD-EPI-für-Cystatin-Formel</h3>
+          <h3 slot="headline">Berechnung der eGFR mit der CKD-EPI-für-Cystatin-C-Formel</h3>
           <p slot="description">
             Die eGFR (geschätzte glomeruläre Filtrationsrate) kann auch unter Verwendung von Cystatin C anstelle von Kreatinin berechnet werden, 
             was eine alternative Methode zur Beurteilung der Nierenfunktion bietet.
@@ -107,22 +105,22 @@ export default class ckdEpiCystatinCalculator extends LitElement {
         <form @submit=${this.submit}>
           <div class="calc-inputs">
             <div class="input-wrapper">
-              <label for="serumCreatinine">Kreatinin im Serum (SKr)</label>
+              <label for="serumCystatin">Cystatin im Serum (SCys)</label>
               <input
                 type="number"
                 placeholder="00.00"
                 min="0"
                 required
                 step="0.01"
-                name="serumCreatinine"
-                id="serumCreatinine"
+                name="serumCystatin"
+                id="serumCystatin"
               />
             </div>
             <div class="input-wrapper">
-              <label for="unit">Einheit</label>
-              <select id="unit" name="unit">
+              <label for="cysUnit">Einheit</label>
+              <select id="cysUnit" name="cysUnit">
                 mark
-                ${creatinineUnits.map(
+                ${cystatinUnits.map(
                   (unit) => html` <option value=${unit}>${unit}</option> `
                 )}
               </select>
