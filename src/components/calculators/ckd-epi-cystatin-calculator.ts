@@ -1,14 +1,7 @@
 import {css, html, LitElement} from "lit";
 import {customElement} from "lit/decorators.js";
 import {EgfrCalculator} from "../../services/egfrCalculator";
-import {
-  type CalculatorInputFields,
-  type CystatinUnit,
-  cystatinUnits,
-  genderTypes,
-  type GenderTypes,
-  ResultEvent,
-} from "../../types";
+import {type CalculatorInputFields, genderTypes, type GenderTypes, ResultEvent,} from "../../types";
 import {appStyles} from "../../styles/app-styles";
 import "../description";
 import {CalcResult} from "../../classes/GfrResult";
@@ -83,12 +76,7 @@ export default class ckdEpiCystatinCalculator extends LitElement {
         name: "gender",
         value: data.get("gender") as GenderTypes,
         icon: "mars-and-venus",
-      },
-      cysUnit: {
-        name: "cysUnit",
-        value: data.get("cysUnit") as CystatinUnit,
-        icon: undefined,
-      },
+      }
     };
   }
 
@@ -115,15 +103,6 @@ export default class ckdEpiCystatinCalculator extends LitElement {
                 name="serumCystatin"
                 id="serumCystatin"
               />
-            </div>
-            <div class="input-wrapper">
-              <label for="cysUnit">Einheit</label>
-              <select id="cysUnit" name="cysUnit">
-                mark
-                ${cystatinUnits.map(
-                  (unit) => html` <option value=${unit}>${unit}</option> `
-                )}
-              </select>
             </div>
 
             <div class="input-wrapper">

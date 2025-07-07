@@ -5,8 +5,6 @@ import {
     type CalculatorInputFields,
     type CreatinineUnit,
     creatinineUnits,
-    type CystatinUnit,
-    cystatinUnits,
     type GenderTypes,
     genderTypes,
     ResultEvent,
@@ -101,12 +99,7 @@ export default class CkdEpiCreatinineCystatinCalculator extends LitElement {
                 name: "scUnit",
                 value: data.get("scUnit") as CreatinineUnit,
                 icon: undefined,
-            },
-            cysUnit: {
-                name: "cysUnit",
-                value: data.get("cysUnit") as CystatinUnit,
-                icon: undefined,
-            },
+            }
         };
     }
 
@@ -169,15 +162,6 @@ export default class CkdEpiCreatinineCystatinCalculator extends LitElement {
                           name="serumCystatin"
                           id="serumCystatin"
                   />
-              </div>
-              <div class="input-wrapper">
-                  <label for="cysUnit">Einheit</label>
-                  <select id="cysUnit" name="cysUnit">
-                      mark
-                      ${cystatinUnits.map(
-                              (unit) => html` <option value=${unit}>${unit}</option> `
-                      )}
-                  </select>
               </div>
 
             <div class="input-wrapper">
