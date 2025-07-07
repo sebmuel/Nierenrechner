@@ -103,11 +103,9 @@ describe("EgfrCalculator", () => {
             const cystatin = 1.1;
             const age = 40;
             const gender = "männlich";
-            const unit = "mg/l";
 
             const result = calculator.calculateCkdEpiForCystatin(
                 cystatin,
-                unit,
                 age,
                 gender
             ).value;
@@ -127,13 +125,11 @@ describe("EgfrCalculator", () => {
             const age = 50;
             const gender = "männlich";
             const scUnit = "mg/dl";
-            const cysUnit = "mg/dl";
 
             const result = calculator.calculateCkdEpiForCreatinineAndCystatin(
                 serumCreatinine,
                 scUnit,
                 serumCystatin,
-                cysUnit,
                 gender,
                 age
             ).value;
