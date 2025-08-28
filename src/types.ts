@@ -13,9 +13,8 @@ export type CalcTypes =
     | "CKD-EPI-Cystatin"
     | "CKD-EPI-Cystatin-Kreatinin"
     | "Cockcroft-Gault";
-export const skinColor = ["schwarz", "weiß"] as const;
+export const skinColor = ["weiß", "schwarz"] as const;
 export type SkinColor = (typeof skinColor)[number];
-export type Creatine = string;
 
 export type Classification = {
     name: string;
@@ -52,7 +51,6 @@ export class ResultEvent extends CustomEvent<CalcResult> {
     }
 }
 
-export type CalculatorInputTypes = "text" | "number";
 export type CalculatorInputValues =
     | string
     | number

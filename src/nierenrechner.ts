@@ -5,7 +5,7 @@ import {logger} from "./services/debugger-logger";
 import {nierenrechnerStyles} from "./styles/nierenrechner-styles";
 import type {TabSelectedData} from "./types";
 import "./components/tabs";
-import "./components/calculators/cmkd-epi-calculator";
+import "./components/calculators/ckd-epi-calculator";
 import "./components/calculators/mdrd-calculator";
 import "./components/calculators/mayo-calculator";
 import "./components/calculators/ckd-epi-cystatin-calculator";
@@ -38,7 +38,7 @@ export class Nierenrechner extends LitElement {
           <app-tabs>
             ${this.ckdEpi ? html`<div slot="tab">CKD-EPI-Formel</div>
             <section slot="panel">
-              <app-cmkd-epi-calculator></app-cmkd-epi-calculator>
+                <app-ckd-epi-calculator></app-ckd-epi-calculator>
             </section>` : html``}
             
             ${this.mdrd ? html`<div slot="tab">MDRD eGFR-Formel</div>

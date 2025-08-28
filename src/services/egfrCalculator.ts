@@ -10,18 +10,26 @@ export class EgfrCalculator {
         unit: CreatinineUnit,
         age: number,
         gender: GenderTypes,
-        skinColor: SkinColor
+        skinColor: SkinColor,
+        weight: number,
+        height: number
     ) {
         serumCreatinine = this.convertSerumCreatinineUnit(serumCreatinine, unit);
         const genderFactors = GenderFactors[gender];
         const skinColorFactors = SkinColorFactors[skinColor];
 
-        const result =
+        let result =
             186 *
             Math.pow(serumCreatinine, -1.154) *
             Math.pow(age, -0.203) *
             genderFactors.mdrd *
             skinColorFactors.mdrd;
+
+        if (!isNaN(weight) && !isNaN(height)) {
+            const bodySurface = this.calculateBodySurface(age, weight, height);
+            result = result * bodySurface / 1.73;
+            return new GfrResult(Math.round(result * 100) / 100, "mL/min", "Mayo");
+        }
 
         return new GfrResult(Math.round(result * 100) / 100, "ml/min/1.73m²", "MDRD");
     }
@@ -30,7 +38,9 @@ export class EgfrCalculator {
         serumCreatinine: number,
         unit: CreatinineUnit,
         age: number,
-        gender: GenderTypes
+        gender: GenderTypes,
+        weight: number,
+        height: number
     ) {
         serumCreatinine = this.convertSerumCreatinineUnit(serumCreatinine, unit);
         const genderFactors = GenderFactors[gender];
@@ -43,20 +53,31 @@ export class EgfrCalculator {
             genderFactors.mayoQuadratic;
 
         let result = Math.exp(exponent);
-        logger.log("result " + result);
+
+        if (!isNaN(weight) && !isNaN(height)) {
+            const bodySurface = this.calculateBodySurface(age, weight, height);
+            result = result * bodySurface / 1.73;
+            return new GfrResult(Math.round(result * 100) / 100, "mL/min", "Mayo");
+        }
+        
         return new GfrResult(Math.round(result * 100) / 100, "mL/min/1.73m²", "Mayo");
     }
 
-    public calculateCkdEpi(serumCreatinine: number, unit: CreatinineUnit, age: number, gender: GenderTypes) {
+    public calculateCkdEpi(serumCreatinine: number, unit: CreatinineUnit, age: number, gender: GenderTypes, weight: number, height: number) {
         serumCreatinine = this.convertSerumCreatinineUnit(serumCreatinine, unit);
         const genderFactors = GenderFactors[gender];
         const scOverK = serumCreatinine / genderFactors.ckdEpiK;
         const minTerm = Math.min(scOverK, 1);
         const maxTerm = Math.max(scOverK, 1);
 
-        const result =
+        let result =
             142 * minTerm ** genderFactors.ckdEpiA * maxTerm ** -1.2 * 0.9938 ** age * genderFactors.ckdEpi;
 
+        if (!isNaN(weight) && !isNaN(height)) {
+            const bodySurface = this.calculateBodySurface(age, weight, height);
+            result = result * bodySurface / 1.73;
+            return new GfrResult(Math.round(result * 100) / 100, "mL/min", "CKD-EPI");
+        }
         return new GfrResult(Math.round(result * 100) / 100, "mL/min/1.73m²", "CKD-EPI");
     }
 
@@ -88,9 +109,9 @@ export class EgfrCalculator {
         const minTermCystatin = Math.min(cysOver, 1);
         const maxTermCystatin = Math.max(cysOver, 1);
 
-        const result = 142 * minTermCreatinine ** alpha * maxTermCreatinine ** -1.200 * minTermCystatin ** -0.500 * 
+        const result = 142 * minTermCreatinine ** alpha * maxTermCreatinine ** -1.200 * minTermCystatin ** -0.500 *
             maxTermCystatin ** -1.800 * 0.9938 ** age * genderFactors.ckdEpiCreatinineCystatin;
-        
+
         return new GfrResult(Math.round(result * 100) / 100, "ml/min/1.73m²", "CKD-EPI-Cystatin-Kreatinin");
     }
 
@@ -118,4 +139,20 @@ export class EgfrCalculator {
         }
         return serumCreatinine;
     }
+
+    private calculateBodySurface(age: number, weight: number, height: number): number {
+        if (age >= 18) {
+            // DuBois-Formel
+            return (
+                Math.pow(weight, 0.425) *
+                Math.pow(height, 0.725) *
+                0.007184
+            );
+        } else {
+            // Mosteller-Formel
+            const inner = weight * height / 3600;
+            return Math.pow(inner, 0.5);
+        }
+    }
+
 }

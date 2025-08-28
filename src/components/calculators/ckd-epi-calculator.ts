@@ -8,16 +8,14 @@ import {
     genderTypes,
     type GenderTypes,
     ResultEvent,
-    skinColor,
-    type SkinColor,
 } from "../../types";
 import {appStyles} from "../../styles/app-styles";
 import "../description";
 import {CalcResult} from "../../classes/GfrResult";
 import classificationService from "../../services/classification-service";
 
-@customElement("app-mdrd-calculator")
-export default class MdrdCalculator extends LitElement {
+@customElement("app-ckd-epi-calculator")
+export default class CkdEpiCalculator extends LitElement {
     static styles = [
         appStyles,
         css`
@@ -27,8 +25,7 @@ export default class MdrdCalculator extends LitElement {
           [serumCreatinine] minmax(max-content, 25%)
           [unit] min(15%)
           [age] max-content
-          [gender]max-content
-          [skinColor] max-content;
+          [gender]max-content;
 
                 gap: 10px;
                 margin-bottom: 30px;
@@ -68,16 +65,15 @@ export default class MdrdCalculator extends LitElement {
         const age = Number.parseInt(formData.get("age") as string);
         const scUnit = formData.get("scUnit") as CreatinineUnit;
         const gender = formData.get("gender") as GenderTypes;
-        const skinColor = formData.get("skinColor") as SkinColor;
         const weight = Number.parseFloat(formData.get("weight") as string);
         const height = Number.parseFloat(formData.get("height") as string);
+        
 
-        const result = this.calculator.calculateMdrd(
+        const result = this.calculator.calculateCkdEpi(
             serumCreatinine,
             scUnit,
             age,
             gender,
-            skinColor,
             weight,
             height
         );
@@ -115,11 +111,6 @@ export default class MdrdCalculator extends LitElement {
                 value: data.get("scUnit") as CreatinineUnit,
                 icon: undefined,
             },
-            skinColor: {
-                name: "skinColor",
-                value: data.get("skinColor") as SkinColor,
-                icon: "user",
-            },
         };
 
         //Check if weight and height are given in form
@@ -149,11 +140,11 @@ export default class MdrdCalculator extends LitElement {
         return html`
             <div class="calc-wrapper">
                 <calc-description>
-                    <h3 slot="headline">Berechnung der eGFR mit der MDRD-Formel</h3>
+                    <h3 slot="headline">Berechnung der eGFR mit der CKD-EPI-Formel</h3>
                     <p slot="description">
-                        Für die vereinfachte Formel 4 der MDRD-Formelserie werden lediglich Kreatinin, Alter, Geschlecht
-                        und Hautfarbe benötigt.
-                        Seit Einführung der CKD-EPI-Formel werden die Formeln 1 bis 3 nur noch selten angewendet.
+                        Die CKD-EPI-Formel (2021) schätzt die GFR genauer als die
+                        MDRD-Formel und ist insbesondere im Grenzbereich von gesunder
+                        Funktion und beginnender Niereninsuffizienz noch zuverlässiger.
                     </p>
                 </calc-description>
                 <form @submit=${this.submit}>
@@ -206,16 +197,6 @@ export default class MdrdCalculator extends LitElement {
                         </div>
 
                         <div class="input-wrapper">
-                            <label for="skinColor">Hautfarbe</label>
-                            <select id="skinColor" name="skinColor">
-                                ${skinColor.map(
-                                        (color) => html`
-                                            <option value=${color}>${color}</option> `
-                                )}
-                            </select>
-                        </div>
-
-                        <div class="input-wrapper">
                             <label for="weight">Gewicht (kg)</label>
                             <input
                                     disabled
@@ -245,6 +226,7 @@ export default class MdrdCalculator extends LitElement {
                                 Berechnung auf normierte Körperfläche 1.73m<sup>2</sup>
                             </label>
                         </div>
+
                     </div>
                     <button type="submit">Berechnen</button>
                 </form>
@@ -272,4 +254,5 @@ export default class MdrdCalculator extends LitElement {
             }
         }
     }
+
 }

@@ -134,7 +134,7 @@ export class ResultModal extends LitElement {
           .fields=${this.result!.formData}
         ></result-header>
         <result-body
-          .score=${this.result?.value}
+                .score=${this.result ? `${this.result.value} ${this.result.unit}` : ""}
           .classification=${this.result?.classification}
         ></result-body>
       </div>

@@ -96,7 +96,7 @@ export default class ckdEpiCystatinCalculator extends LitElement {
               <label for="serumCystatin">Cystatin im Serum (SCys)</label>
               <input
                 type="number"
-                placeholder="00.00"
+                placeholder="00.00 [mg/l]"
                 min="0"
                 required
                 step="0.01"

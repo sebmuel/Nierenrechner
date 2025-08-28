@@ -1,10 +1,10 @@
-import { css, html, LitElement } from "lit";
-import { customElement, property } from "lit/decorators.js";
-import type { Classification } from "../types";
-import { appStyles } from "../styles/app-styles";
+import {css, html, LitElement} from "lit";
+import {customElement, property} from "lit/decorators.js";
+import type {Classification} from "../types";
+import {appStyles} from "../styles/app-styles";
 import "./grade-descriptions";
 import "./classification-list";
-import { classifications } from "../constants/classifications";
+import {classifications} from "../constants/classifications";
 
 @customElement("result-body")
 export default class ResultBody extends LitElement {
@@ -19,7 +19,7 @@ export default class ResultBody extends LitElement {
       </tr>
       <tr>
         <td>eGFR</td>
-        <td>${this.score} ml/min/1.73 m²</td>
+          <td>${this.score}</td>
       </tr>
       <tr>
         <td>Zustand</td>

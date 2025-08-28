@@ -1,10 +1,17 @@
 import {icon, type Icon, type IconName, library,} from "@fortawesome/fontawesome-svg-core";
-import {faBirthdayCake, faMarsAndVenus, faSyringe, faUser, faWeightScale,} from "@fortawesome/free-solid-svg-icons";
+import {
+    faBirthdayCake,
+    faMarsAndVenus,
+    faRulerVertical,
+    faSyringe,
+    faUser,
+    faWeightScale
+} from "@fortawesome/free-solid-svg-icons";
 import {logger} from "./debugger-logger";
 
 export class IconService {
   constructor() {
-    library.add(faSyringe, faBirthdayCake, faMarsAndVenus, faUser, faWeightScale);
+      library.add(faSyringe, faBirthdayCake, faMarsAndVenus, faUser, faWeightScale, faRulerVertical);
   }
 
   getIcon(iconName: IconName): Icon | null {
