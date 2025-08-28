@@ -22,7 +22,9 @@ describe("EgfrCalculator", () => {
                 unit,
                 age,
                 gender,
-                skinColor
+                skinColor,
+                NaN,
+                NaN
             ).value;
 
             const expected = 62.38;
@@ -44,7 +46,9 @@ describe("EgfrCalculator", () => {
                 unit,
                 age,
                 gender,
-                skinColor
+                skinColor,
+                NaN,
+                NaN
             ).value;
 
             const expected = 88.4;
@@ -66,7 +70,9 @@ describe("EgfrCalculator", () => {
                 serumCreatinine,
                 unit,
                 age,
-                gender
+                gender,
+                NaN,
+                NaN
             ).value;
 
             const expected = 93.95;
@@ -87,7 +93,9 @@ describe("EgfrCalculator", () => {
                 serumCreatinine,
                 "mg/dl",
                 age,
-                gender
+                gender,
+                NaN,
+                NaN
             ).value;
 
             const expected = 70.95;
