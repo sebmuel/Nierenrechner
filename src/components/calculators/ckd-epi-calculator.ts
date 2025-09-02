@@ -39,7 +39,8 @@ export default class CkdEpiCalculator extends LitElement {
             #bodySurface label {
                 display: inline-block;
                 width: 210px;
-                padding-top: 20px
+                padding-top: 20px;
+                color: var(--app-paragraph-font-color);
             }
 
             #height, #weight {

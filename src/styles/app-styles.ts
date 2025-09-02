@@ -10,13 +10,15 @@ export const appStyles = css`
         width: 100%;
         margin: 0 auto;
         box-sizing: border-box;
-        --app-theme-color: #00b0c7;
+        --app-theme-color: #53caec;
         --app-secondary-color: #03989e;
         --app-theme-color-dark: #00677f;
         --app-theme-border-color: rgb(79, 118, 82);
         --app-gray: #d3d3d3;
-        --app-white: #ffffff;
+        --app-darkgrey: #333;
+        --app-white: #ffff;
         --app-max-width: 1000px;
+        --app-paragraph-font-color: #333;
     }
 
     #nierenrechner {
@@ -45,7 +47,8 @@ export const appStyles = css`
         font-size: var(--app-paragraph-font-size, 1rem);
         line-height: var(--app-paragraph-line-height, 1.3);
         font-weight: var(--app-paragraph-font-weight, 400);
-        color: var(--app-paragraph-font-color, var(--app-white));
+        color: var(--app-paragraph-font-color, var(--app-darkgrey));
+
     }
 
     p,
@@ -68,7 +71,7 @@ export const appStyles = css`
     .input-wrapper label {
         font-size: var(--app-input-label-font-size, 1rem);
         font-weight: var(--app-input-label-font-weight, 400);
-        color: var(--app-input-label-font-color, var(--app-white));
+        color: var(--app-input-label-font-color, var(--app-darkgrey));
         margin-bottom: 5px;
     }
 
