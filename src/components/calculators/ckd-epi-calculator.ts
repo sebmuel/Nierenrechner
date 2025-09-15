@@ -40,11 +40,12 @@ export default class CkdEpiCalculator extends LitElement {
                 display: inline-block;
                 width: 210px;
                 padding-top: 20px;
-                color: var(--app-paragraph-font-color);
+                font-size: 16px;
+                color: var(--app-theme-text);
             }
 
             #height, #weight {
-                background-color: var(--app-gray)
+                background-color: var(--app-theme-field-disabled)
             }
 
             @media (max-width: 980px) {
@@ -245,8 +246,8 @@ export default class CkdEpiCalculator extends LitElement {
             if (!checked) {
                 weight.setAttribute("disabled", "true");
                 height.setAttribute("disabled", "true");
-                weight.style.backgroundColor = "var(--app-gray)"
-                height.style.backgroundColor = "var(--app-gray)"
+                weight.style.backgroundColor = "var(--app-theme-field-disabled)"
+                height.style.backgroundColor = "var(--app-theme-field-disabled)"
             } else {
                 weight.removeAttribute("disabled");
                 height.removeAttribute("disabled");

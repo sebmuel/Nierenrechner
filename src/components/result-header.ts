@@ -21,7 +21,7 @@ export class ResultHeader extends LitElement {
         flex-flow: row wrap;
         gap: 60px;
         background-color: #fff;
-        border-bottom: 3px solid var(--app-theme-border-color);
+          border-bottom: 3px solid var(--app-theme-border);
         padding-bottom: 30px;
       }
 
@@ -36,7 +36,7 @@ export class ResultHeader extends LitElement {
         width: var(--svg-size);
         height: var(--svg-size);
         display: block;
-        color: var(--app-theme-color-dark);
+          color: var(--app-theme-accent-dark);
       }
 
       .data-value {

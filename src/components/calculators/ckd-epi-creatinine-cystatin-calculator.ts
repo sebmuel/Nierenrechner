@@ -5,6 +5,7 @@ import {
     type CalculatorInputFields,
     type CreatinineUnit,
     creatinineUnits,
+    cystatinUnits,
     type GenderTypes,
     genderTypes,
     ResultEvent,
@@ -19,23 +20,23 @@ export default class CkdEpiCreatinineCystatinCalculator extends LitElement {
     static styles = [
         appStyles,
         css`
-      .calc-inputs {
-        display: grid;
-        grid-template-columns:
+            .calc-inputs {
+                display: grid;
+                grid-template-columns:
           [serumCreatinine] minmax(max-content, 25%)
           [scUnit] max-content
           [age] max-content;
 
-        gap: 10px;
-        margin-bottom: 30px;
-      }
+                gap: 10px;
+                margin-bottom: 30px;
+            }
 
-      @media (max-width: 980px) {
-        .calc-inputs {
-          grid-template-columns: 1fr;
-        }
-      }
-    `,
+            @media (max-width: 980px) {
+                .calc-inputs {
+                    grid-template-columns: 1fr;
+                }
+            }
+        `,
     ];
 
     calculator: EgfrCalculator = new EgfrCalculator();
@@ -52,8 +53,8 @@ export default class CkdEpiCreatinineCystatinCalculator extends LitElement {
         const age = Number.parseInt(formData.get("age") as string);
         const scUnit = formData.get("scUnit") as CreatinineUnit;
         const gender = formData.get("gender") as GenderTypes;
-        
-        
+
+
         const result = this.calculator.calculateCkdEpiForCreatinineAndCystatin(
             serumCreatinine,
             scUnit,
@@ -70,7 +71,7 @@ export default class CkdEpiCreatinineCystatinCalculator extends LitElement {
             classificationService.getClassificationByScore(result.value)!
         );
 
-        this.dispatchEvent(new ResultEvent("result", { detail: calcResult }));
+        this.dispatchEvent(new ResultEvent("result", {detail: calcResult}));
     }
 
     mapInputTypes(data: FormData): Record<string, CalculatorInputFields> {
@@ -105,77 +106,91 @@ export default class CkdEpiCreatinineCystatinCalculator extends LitElement {
 
     render() {
         return html`
-      <div class="calc-wrapper">
-        <calc-description>
-          <h3 slot="headline">Berechnung der eGFR mit der CKD-EPI-Kreatinin-Cystatin-C-Formel</h3>
-          <p slot="description">
-              Die CKD-EPI Kreatinin-Cystatin-C-Formel (2021) gilt allgemein als die genaueste und wird von den meisten Laboren empfohlen. 
-              Sie ist geschlechtsspezifisch und berücksichtigt Alter, Kreatinin- und Cystatin-C-Werte.
-          </p>
-        </calc-description>
-        <form @submit=${this.submit}>
-          <div class="calc-inputs">
-            <div class="input-wrapper">
-              <label for="serumCreatinine">Kreatinin im Serum (SKr)</label>
-              <input
-                type="number"
-                placeholder="00.00"
-                min="0"
-                required
-                step="0.01"
-                name="serumCreatinine"
-                id="serumCreatinine"
-              />
-            </div>
-            <div class="input-wrapper">
-              <label for="scUnit">Einheit</label>
-              <select id="scUnit" name="scUnit">
-                mark
-                ${creatinineUnits.map(
-            (unit) => html` <option value=${unit}>${unit}</option> `
-        )}
-              </select>
-            </div>
+            <div class="calc-wrapper">
+                <calc-description>
+                    <h3 slot="headline">Berechnung der eGFR mit der CKD-EPI-Kreatinin-Cystatin-C-Formel</h3>
+                    <p slot="description">
+                        Die CKD-EPI Kreatinin-Cystatin-C-Formel (2021) gilt allgemein als die genaueste und wird von den
+                        meisten Laboren empfohlen.
+                        Sie ist geschlechtsspezifisch und berücksichtigt Alter, Kreatinin- und Cystatin-C-Werte.
+                    </p>
+                </calc-description>
+                <form @submit=${this.submit}>
+                    <div class="calc-inputs">
+                        <div class="input-wrapper">
+                            <label for="serumCreatinine">Kreatinin im Serum (SKr)</label>
+                            <input
+                                    type="number"
+                                    placeholder="00.00"
+                                    min="0"
+                                    required
+                                    step="0.01"
+                                    name="serumCreatinine"
+                                    id="serumCreatinine"
+                            />
+                        </div>
+                        <div class="input-wrapper">
+                            <label for="scUnit">Einheit</label>
+                            <select id="scUnit" name="scUnit">
+                                mark
+                                ${creatinineUnits.map(
+                                        (unit) => html`
+                                            <option value=${unit}>${unit}</option> `
+                                )}
+                            </select>
+                        </div>
 
-              <div class="input-wrapper">
-                  <label for="age">Alter (Jahre)</label>
-                  <input
-                          type="number"
-                          placeholder="18-99"
-                          min="18"
-                          max="99"
-                          required
-                          step="1"
-                          name="age"
-                          id="age"
-                  />
-              </div>
-              
-              <div class="input-wrapper">
-                  <label for="serumCystatin">Cystatin im Serum (SCys)</label>
-                  <input
-                          type="number"
-                          placeholder="00.00 [mg/l]"
-                          min="0"
-                          required
-                          step="0.01"
-                          name="serumCystatin"
-                          id="serumCystatin"
-                  />
-              </div>
+                        <div class="input-wrapper">
+                            <label for="age">Alter (Jahre)</label>
+                            <input
+                                    type="number"
+                                    placeholder="18-99"
+                                    min="18"
+                                    max="99"
+                                    required
+                                    step="1"
+                                    name="age"
+                                    id="age"
+                            />
+                        </div>
 
-            <div class="input-wrapper">
-              <label for="gender">Geschlecht</label>
-              <select id="gender" name="gender">
-                ${genderTypes.map(
-            (gender) => html` <option value=${gender}>${gender}</option> `
-        )}
-              </select>
+                        <div class="input-wrapper">
+                            <label for="serumCystatin">Cystatin im Serum (SCys)</label>
+                            <input
+                                    type="number"
+                                    placeholder="00.00"
+                                    min="0"
+                                    required
+                                    step="0.01"
+                                    name="serumCystatin"
+                                    id="serumCystatin"
+                            />
+                        </div>
+
+                        <div class="input-wrapper">
+                            <label for="scUnit">Einheit</label>
+                            <select id="scUnit" name="scUnit">
+                                mark
+                                ${cystatinUnits.map(
+                                        (unit) => html`
+                                            <option value=${unit}>${unit}</option> `
+                                )}
+                            </select>
+                        </div>
+
+                        <div class="input-wrapper">
+                            <label for="gender">Geschlecht</label>
+                            <select id="gender" name="gender">
+                                ${genderTypes.map(
+                                        (gender) => html`
+                                            <option value=${gender}>${gender}</option> `
+                                )}
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit">Berechnen</button>
+                </form>
             </div>
-          </div>
-          <button type="submit">Berechnen</button>
-        </form>
-      </div>
-    `;
+        `;
     }
 }

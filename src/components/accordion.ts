@@ -13,7 +13,7 @@ export class AccessibleAccordion extends LitElement {
     }
     .accordion-header {
       background-color: #ffffff;
-      color: var(--app-secondary-color);
+        color: var(--app-theme-accent);
       cursor: pointer;
       padding: 18px;
       text-align: left;

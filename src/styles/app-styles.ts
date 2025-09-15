@@ -1,28 +1,28 @@
 import {css} from "lit";
 
 export const appStyles = css`
-    .nierenrechner {
-        position: relative;
-    }
 
     :host {
         display: inline-block;
+        position: relative;
         width: 100%;
         margin: 0 auto;
         box-sizing: border-box;
-        --app-theme-color: #53caec;
-        --app-secondary-color: #03989e;
-        --app-theme-color-dark: #00677f;
-        --app-theme-border-color: rgb(79, 118, 82);
-        --app-gray: #d3d3d3;
-        --app-darkgrey: #333;
-        --app-white: #ffff;
-        --app-max-width: 1000px;
-        --app-paragraph-font-color: #333;
+        font-family: "Comic Relief", system-ui;
+        line-height: 1.5;
+        --app-theme-primary: #53caec;
+        --app-theme-accent: #03989e;
+        --app-theme-accent-dark: #00677f;
+        --app-theme-border: rgb(79, 118, 82);
+        --app-theme-field-disabled: #d3d3d3;
+        --app-theme-label: #333;
+        --app-theme-tab-underline: #ffff;
+        --app-theme-max-width: 1000px;
+        --app-theme-text: #333;
     }
 
     #nierenrechner {
-        max-width: var(--app-max-width, 100%);
+        max-width: var(--app-theme-max-width, 100%);
         margin: 0 auto;
     }
 
@@ -47,7 +47,7 @@ export const appStyles = css`
         font-size: var(--app-paragraph-font-size, 1rem);
         line-height: var(--app-paragraph-line-height, 1.3);
         font-weight: var(--app-paragraph-font-weight, 400);
-        color: var(--app-paragraph-font-color, var(--app-darkgrey));
+        color: var(--app-theme-text, var(--app-theme-label));
 
     }
 
@@ -71,7 +71,7 @@ export const appStyles = css`
     .input-wrapper label {
         font-size: var(--app-input-label-font-size, 1rem);
         font-weight: var(--app-input-label-font-weight, 400);
-        color: var(--app-input-label-font-color, var(--app-darkgrey));
+        color: var(--app-input-label-font-color, var(--app-theme-label));
         margin-bottom: 5px;
     }
 
@@ -93,14 +93,14 @@ export const appStyles = css`
     .input-wrapper input[type="text"]:focus,
     .input-wrapper select:focus {
         outline: none;
-        border-color: var(--app-input-border-color-focus-rgb, var(--app-secondary-color, #000));
+        border-color: var(--app-input-border-color-focus-rgb, var(--app-theme-accent, #000));
     }
 
     .calc-wrapper button[type="submit"] {
-        background-color: var(--app-button-background-color, var(--app-theme-color-dark));
+        background-color: var(--app-button-background-color, var(--app-theme-accent-dark));
         appearance: none;
         outline: none;
-        border: var(--app-button-border-width, 1px) solid var(--app-input-border-color-rgb, var(--app-theme-color-dark, #000));
+        border: var(--app-button-border-width, 1px) solid var(--app-input-border-color-rgb, var(--app-theme-accent-dark, #000));
         border-radius: var(--app-button-border-radius, 5px);
         padding: 10px;
         font-size: var(--app-button-font-size, 1rem);

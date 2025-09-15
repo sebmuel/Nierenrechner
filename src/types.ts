@@ -2,6 +2,7 @@ import type {IconName} from "@fortawesome/fontawesome-svg-core";
 import type {CalcResult} from "./classes/GfrResult";
 
 export const creatinineUnits = ["mg/dl", "µmol/l"] as const;
+export const cystatinUnits = ["mg/dl"] as const;
 export type CreatinineUnit = (typeof creatinineUnits)[number];
 
 export const genderTypes = ["männlich", "weiblich"] as const;

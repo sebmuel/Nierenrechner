@@ -9,7 +9,7 @@ export class Tabs extends LitElement {
     appStyles,
     css`
       :host {
-        --app-tab-color: var(--app-theme-color-dark);
+          --app-tab-color: var(--app-theme-accent-dark);
       }
 
       nav {
@@ -19,7 +19,7 @@ export class Tabs extends LitElement {
         padding: 1rem 0.5rem;
         flex: 1 1 auto;
         color: var(--app-tab-color, #fff);
-        border-bottom: 2px solid var(--app-white, #fff);
+          border-bottom: 2px solid var(--app-theme-tab-underline, #fff);
         text-align: center;
         cursor: pointer;
       }

@@ -1,8 +1,8 @@
-import { css, html, LitElement } from "lit";
-import { customElement, property } from "lit/decorators.js";
-import type { Classification } from "../types";
+import {css, html, LitElement} from "lit";
+import {customElement, property} from "lit/decorators.js";
+import type {Classification} from "../types";
 import "./accordion";
-import { appStyles } from "../styles/app-styles";
+import {appStyles} from "../styles/app-styles";
 
 @customElement("classification-list")
 export default class ClassificationList extends LitElement {
@@ -82,8 +82,9 @@ export default class ClassificationList extends LitElement {
       }
 
       .classification-field {
+          font-size: 16px;
         padding: 10px;
-        background-color: var(--app-theme-color);
+          background-color: var(--app-theme-primary);
         color: #000;
         border-radius: 5px;
       }

@@ -1,6 +1,6 @@
-import { css, html, LitElement } from "lit";
-import { customElement, property } from "lit/decorators.js";
-import { appStyles } from "../styles/app-styles";
+import {css, html, LitElement} from "lit";
+import {customElement, property} from "lit/decorators.js";
+import {appStyles} from "../styles/app-styles";
 
 @customElement("grade-descriptions")
 export default class GradeDesciptions extends LitElement {
@@ -44,7 +44,8 @@ export default class GradeDesciptions extends LitElement {
 
       .description {
         padding: 10px;
-        background-color: var(--app-theme-color);
+          font-size: 16px;
+          background-color: var(--app-theme-primary);
         border-radius: 5px;
       }
       .description:not(:last-child) {

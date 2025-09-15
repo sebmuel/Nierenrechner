@@ -93,7 +93,7 @@ export default class ResultBody extends LitElement {
         padding: 0;
         font-size: 1.25rem;
         font-weight: 600;
-        color: var(--app-theme-color);
+          color: var(--app-theme-primary);
         text-align: center;
         margin-bottom: 30px;
       }
@@ -106,7 +106,7 @@ export default class ResultBody extends LitElement {
 
       .result {
         padding: 30px 0;
-        border-bottom: 3px solid var(--app-theme-border-color);
+          border-bottom: 3px solid var(--app-theme-border);
       }
 
       .classification {
@@ -135,6 +135,7 @@ export default class ResultBody extends LitElement {
         border-collapse: collapse;
         margin-bottom: 20px;
         font-size: 1rem;
+          color: black
       }
 
       .result-table th,
