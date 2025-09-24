@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc && vite build && bestzip dist/package.zip dist/nierenrechner.js README.md",
     "preview": "vite preview",
     "test": "vitest"
   },
@@ -17,6 +17,7 @@
     "lit": "^3.3.0"
   },
   "devDependencies": {
+    "bestzip": "^2.2.1",
     "typescript": "~5.8.3",
     "vite": "^6.3.5",
     "vitest": "^3.1.4"
