@@ -127,7 +127,7 @@ describe("EgfrCalculator", () => {
     });
 
     describe("calculate CKD-EPI For Creatinine and Cystatin C", () => {
-        it("should calculate correct value for 50 years old male with 2mg/dl of creatinine and 2mg/dl of cystatin C", () => {
+        it("should calculate correct value for 50 years old male with 2mg/dl of creatinine and 2mg/l of cystatin C", () => {
             const serumCreatinine = 2.0;
             const serumCystatin = 2.0;
             const age = 50;
@@ -142,11 +142,37 @@ describe("EgfrCalculator", () => {
                 age
             ).value;
 
-            const expected = 7.76;
+            const expected = 35.26;
 
             console.log("expected ", expected);
             console.log("result ", result);
             expect(result).toBe(expected);
+        });
+
+        // Reference values from the customer's eGFR.xlsx worked example
+        // (SCr=6 mg/dl, Cys-C=3 mg/l, age 57), "2021 combined" cells K14/J14.
+        it("should match the spreadsheet reference for a 57 years old male", () => {
+            const result = calculator.calculateCkdEpiForCreatinineAndCystatin(
+                6.0,
+                "mg/dl",
+                3.0,
+                "männlich",
+                57
+            ).value;
+
+            expect(result).toBe(13.77);
+        });
+
+        it("should match the spreadsheet reference for a 57 years old female", () => {
+            const result = calculator.calculateCkdEpiForCreatinineAndCystatin(
+                6.0,
+                "mg/dl",
+                3.0,
+                "weiblich",
+                57
+            ).value;
+
+            expect(result).toBe(12.01);
         });
     });
 

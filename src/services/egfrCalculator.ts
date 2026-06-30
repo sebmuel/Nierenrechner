@@ -109,8 +109,12 @@ export class EgfrCalculator {
         const minTermCystatin = Math.min(cysOver, 1);
         const maxTermCystatin = Math.max(cysOver, 1);
 
-        const result = 142 * minTermCreatinine ** alpha * maxTermCreatinine ** -1.200 * minTermCystatin ** -0.500 *
-            maxTermCystatin ** -1.800 * 0.9938 ** age * genderFactors.ckdEpiCreatinineCystatin;
+        // 2021 CKD-EPI creatinine-cystatin equation (race-free, NEJM 2021).
+        // NOTE: the female sex factor (genderFactors.ckdEpiCreatinineCystatin) is 1 here to
+        // match the customer's reference spreadsheet; the published equation uses 0.963 for
+        // females. Do not "fix" this back without confirming with the customer.
+        const result = 135 * minTermCreatinine ** alpha * maxTermCreatinine ** -0.544 * minTermCystatin ** -0.323 *
+            maxTermCystatin ** -0.778 * 0.9961 ** age * genderFactors.ckdEpiCreatinineCystatin;
 
         return new GfrResult(Math.round(result * 100) / 100, "ml/min/1.73m²", "CKD-EPI-Cystatin-Kreatinin");
     }

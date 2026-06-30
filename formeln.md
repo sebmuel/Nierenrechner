@@ -109,3 +109,32 @@ Es gibt noch eine Kombination der Kreatinin/CystatinC Formel – hier muss ich d
 ## Nachtrag 11.06.2025
 
 Es gibt mehrere Formeln zur Berechnung der GFR (glomeruläre Filtrationsrate) unter Verwendung von Kreatinin und Cystatin C. Hier sind die am häufigsten verwendeten: CKD-EPI Kreatinin-Cystatin-C-Gleichung (2021): Diese Formel gilt allgemein als die genaueste und wird von den meisten Labors empfohlen. Sie ist geschlechtsspezifisch und berücksichtigt Alter, Kreatinin- und Cystatin-C-Werte. Die Formeln lauten: Frauen: GFR = 142 _ min(Scr/k, 1)^alpha _ max(Scr/k, 1)^-1.200 _ min(Scys/0.8, 1)^-0.500 _ max(Scys/0.8, 1)^-1.800 _ 0.9938^Alter Männer: GFR = 142 _ min(Scr/k, 1)^alpha _ max(Scr/k, 1)^-1.200 _ min(Scys/0.8, 1)^-0.500 _ max(Scys/0.8, 1)^-1.800 _ 0.9938^Alter \* 1.012 wobei: Scr = Serumkreatinin (mg/dL) Scys = Serumcystatin C (mg/L) k = 0,7 für Frauen, 0,9 für Männer alpha = -0,248 für Frauen, -0,602 für Männer min() = Minimum von Scr/k oder 1 max() = Maximum von Scr/k oder 1 Diese Formel ist komplex, wird aber in der Regel von Laborsoftware automatisch berechnet. Wichtige Hinweise: Einheiten: Achten Sie darauf, dass die Kreatinin- und Cystatin-C-Werte in den korrekten Einheiten vorliegen, die in der Formel verwendet werden.
+
+## Korrektur 30.06.2026
+
+**Achtung: Die im Nachtrag 11.06.2025 gelieferte Kreatinin-Cystatin-C-Formel ist falsch
+und darf nicht mehr verwendet werden.** Sie enthielt die Koeffizienten der reinen
+Kreatinin-Formel (Grundwert `142`, Altersfaktor `0.9938`) kombiniert mit nicht-amtlichen
+Cystatin-Exponenten (`-0.500` / `-1.800`) und einem falschen Kreatinin-Exponenten (`-1.200`).
+Damit lieferte der Rechner viel zu niedrige Werte (Beispiel Mann, Scr 6 mg/dl, Scys 3 mg/l,
+57 J.: 0,96 statt 13,77).
+
+Korrekt ist die offizielle CKD-EPI Kreatinin-Cystatin-C-Gleichung (2021, ohne Rassefaktor):
+
+```
+GFR = 135
+      × min(Scr/k, 1)^alpha   × max(Scr/k, 1)^-0.544
+      × min(Scys/0.8, 1)^-0.323 × max(Scys/0.8, 1)^-0.778
+      × 0.9961^Alter
+      × [Frauenfaktor]
+
+k     = 0,7 (Frauen) / 0,9 (Männer)
+alpha = -0,219 (Frauen) / -0,144 (Männer)
+Scr   = Serumkreatinin (mg/dl)
+Scys  = Serumcystatin C (mg/L)
+```
+
+Hinweis zum Frauenfaktor: Die amtliche Gleichung multipliziert das Ergebnis bei Frauen
+zusätzlich mit `0,963`. Die Referenz-Exceldatei des Kunden (`docs/error-reports/eGFR.xlsx`)
+lässt diesen Faktor bei den Frauen weg. Die aktuelle Implementierung folgt der Exceldatei
+(Frauenfaktor = `1`, Ergebnis 12,01 statt 11,56). Dies ist mit dem Kunden noch abzustimmen.
